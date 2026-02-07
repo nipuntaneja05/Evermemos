@@ -49,11 +49,15 @@ You should NOT flag as topic shifts:
         Process a list of DialogueTurns and identify episode boundaries.
         
         Returns a list of (start_idx, end_idx) tuples representing episode segments.
+        
+        OPTIMIZATION: Skip LLM-based detection for short conversations.
         """
         if not turns:
             return []
         
-        if len(turns) <= self.window_size:
+        # OPTIMIZATION: For short conversations, treat as single episode (no LLM calls)
+        skip_threshold = getattr(Config, 'SKIP_BOUNDARY_DETECTION_THRESHOLD', 10)
+        if len(turns) <= skip_threshold:
             return [(0, len(turns) - 1)]
         
         boundaries = [0]  # Start with first turn
@@ -320,8 +324,13 @@ Rules:
         
         duration_type = f_data.get("duration_type", "indefinite")
         start_offset = f_data.get("start_offset_days", 0)
+        if start_offset is None:
+            start_offset = 0
         
-        t_start = current_time + timedelta(days=start_offset)
+        try:
+            t_start = current_time + timedelta(days=int(start_offset))
+        except (TypeError, ValueError):
+            t_start = current_time
         
         if duration_type == "fixed":
             duration_value = f_data.get("duration_value")
@@ -364,13 +373,7 @@ class EpisodicTraceFormation:
         """
         Process a full conversation transcript into MemCells.
         
-        Args:
-            transcript: Raw conversation transcript
-            conversation_id: Optional ID for the conversation
-            current_time: Current timestamp
-            
-        Returns:
-            List of MemCell objects
+        OPTIMIZATION: Uses combined prompt for narrative + extraction (1 LLM call instead of 2).
         """
         if current_time is None:
             current_time = datetime.now()
@@ -381,31 +384,102 @@ class EpisodicTraceFormation:
         if not turns:
             return []
         
-        # Detect episode boundaries
+        # Detect episode boundaries (skipped for short conversations)
         segments = self.boundary_detector.detect_boundaries(turns)
         
-        # Process each segment
+        # Process each segment with COMBINED prompt
         memcells = []
         for start_idx, end_idx in segments:
             segment_turns = turns[start_idx:end_idx + 1]
             
-            # Synthesize narrative
-            episode = self.narrative_synthesizer.synthesize(
-                segment_turns, conversation_id
+            # OPTIMIZATION: Combined narrative + extraction in ONE LLM call
+            memcell = self._process_segment_combined(
+                segment_turns, conversation_id, current_time
             )
             
-            # Extract MemCell
-            memcell = self.memcell_extractor.extract(
-                episode, segment_turns, conversation_id, current_time
-            )
-            
-            # Generate embedding
-            searchable_text = memcell.get_searchable_text()
-            memcell.embedding = self.llm.embed(searchable_text)
-            
-            memcells.append(memcell)
+            if memcell:
+                # Generate embedding (local, no API call)
+                searchable_text = memcell.get_searchable_text()
+                memcell.embedding = self.llm.embed(searchable_text)
+                memcells.append(memcell)
         
         return memcells
+    
+    def _process_segment_combined(self, turns: list, conversation_id: str, 
+                                   current_time: datetime) -> MemCell:
+        """
+        OPTIMIZATION: Process a segment with a single combined LLM call.
+        This replaces the separate narrative_synthesizer.synthesize() + memcell_extractor.extract() calls.
+        """
+        # Format dialogue
+        dialogue_text = "\n".join([f"{t.speaker}: {t.content}" for t in turns])
+        
+        prompt = f"""Analyze this dialogue and provide BOTH a narrative summary AND structured extraction.
+
+DIALOGUE:
+{dialogue_text}
+
+CURRENT TIME: {current_time.strftime("%Y-%m-%d %H:%M")}
+
+Respond with JSON containing:
+{{
+    "episode": "A clear, third-person narrative summary of the dialogue. Resolve all pronouns and references.",
+    "atomic_facts": [
+        "Discrete, verifiable statement 1",
+        "Discrete, verifiable statement 2"
+    ],
+    "foresights": [
+        {{
+            "content": "Any plan/intention/temporary state mentioned",
+            "duration_type": "fixed|ongoing|indefinite",
+            "duration_value": null,
+            "start_offset_days": 0
+        }}
+    ],
+    "tags": ["tag1", "tag2"]
+}}
+
+Rules:
+- Episode should be 2-4 sentences, third-person perspective
+- Atomic facts: each independently verifiable
+- Foresights: include duration if mentioned (e.g., "10 days" = fixed, 10)
+- Tags: high-level categories (health, work, travel, etc.)"""
+
+        system_prompt = """You are a memory system that converts dialogues into structured memories.
+Extract key information accurately and completely."""
+
+        result = self.llm.generate_json(prompt, system_prompt)
+        
+        if "error" in result:
+            # Fallback: use separate calls
+            episode = self.narrative_synthesizer.synthesize(turns, conversation_id)
+            return self.memcell_extractor.extract(episode, turns, conversation_id, current_time)
+        
+        # Build MemCell from combined result
+        turn_range = (turns[0].turn_id, turns[-1].turn_id) if turns else (0, 0)
+        
+        metadata = Metadata(
+            created_at=current_time,
+            updated_at=current_time,
+            source_conversation_id=conversation_id,
+            turn_range=turn_range,
+            participant_ids=list(set(t.speaker for t in turns)),
+            tags=result.get("tags", [])
+        )
+        
+        # Parse foresights
+        foresights = []
+        for f_data in result.get("foresights", []):
+            foresight = self.memcell_extractor._parse_foresight(f_data, current_time)
+            if foresight:
+                foresights.append(foresight)
+        
+        return MemCell(
+            episode=result.get("episode", ""),
+            atomic_facts=result.get("atomic_facts", []),
+            foresights=foresights,
+            metadata=metadata
+        )
     
     def process_turns(self, turns: list, conversation_id: str = "",
                      current_time: datetime = None) -> list:

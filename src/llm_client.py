@@ -1,31 +1,30 @@
 """
 LLM Client for Evermemos.
-Uses Google Gemini API for text generation and local Qwen for embeddings.
+Uses Groq API for text generation and local Qwen for embeddings.
 """
 
 import json
 import re
 import time
 from typing import Optional
-from google import genai
-from google.genai import types
+from groq import Groq
 from sentence_transformers import SentenceTransformer
 from .config import Config
 
 
-class GeminiClient:
-    """Client for Gemini API (text gen) and local Qwen embeddings."""
+class GroqClient:
+    """Client for Groq API (text gen) and local Qwen embeddings."""
     
-    # Rate limiting for Gemini API only
-    MAX_RETRIES = 5
-    BASE_DELAY = 10
-    MAX_DELAY = 120
-    CALL_DELAY = 5  # Only for Gemini API calls
+    # Groq free tier: 30 req/min, 14,400 req/day
+    MAX_RETRIES = 3
+    BASE_DELAY = 2
+    MAX_DELAY = 30
+    CALL_DELAY = 0.5  # Much faster than Gemini!
     
     def __init__(self):
-        # Gemini for text generation
-        self.client = genai.Client(api_key=Config.GEMINI_API_KEY)
-        self.model_id = Config.GEMINI_MODEL
+        # Groq for text generation
+        self.client = Groq(api_key=Config.GROQ_API_KEY)
+        self.model_id = Config.GROQ_MODEL
         
         # Local Qwen for embeddings (no API calls!)
         print(f"Loading local embedding model: {Config.EMBEDDING_MODEL}...")
@@ -41,7 +40,7 @@ class GeminiClient:
                 return func(*args, **kwargs)
             except Exception as e:
                 error_str = str(e).lower()
-                if "429" in error_str or "quota" in error_str or "rate" in error_str or "resource" in error_str:
+                if "rate" in error_str or "429" in error_str or "quota" in error_str:
                     last_exception = e
                     if attempt < self.MAX_RETRIES - 1:
                         delay = min(self.BASE_DELAY * (2 ** attempt), self.MAX_DELAY)
@@ -54,29 +53,38 @@ class GeminiClient:
     
     def generate(self, prompt: str, system_instruction: str = None, 
                  temperature: float = 0.7, max_tokens: int = 4096) -> str:
-        """Generate text using Gemini."""
+        """Generate text using Groq."""
         
         def _do_generate():
-            config = types.GenerateContentConfig(
+            messages = []
+            
+            if system_instruction:
+                messages.append({
+                    "role": "system",
+                    "content": system_instruction
+                })
+            
+            messages.append({
+                "role": "user",
+                "content": prompt
+            })
+            
+            response = self.client.chat.completions.create(
+                model=self.model_id,
+                messages=messages,
                 temperature=temperature,
-                max_output_tokens=max_tokens,
-                system_instruction=system_instruction
+                max_tokens=max_tokens
             )
             
-            response = self.client.models.generate_content(
-                model=self.model_id,
-                contents=prompt,
-                config=config
-            )
-            return response.text
+            return response.choices[0].message.content
         
         result = self._retry_with_backoff(_do_generate)
-        time.sleep(self.CALL_DELAY)  # Rate limit protection
+        time.sleep(self.CALL_DELAY)  # Minimal delay for Groq
         return result
     
     def generate_json(self, prompt: str, system_instruction: str = None,
                       temperature: float = 0.3) -> dict:
-        """Generate JSON output using Gemini."""
+        """Generate JSON output using Groq."""
         json_prompt = f"""{prompt}
 
 IMPORTANT: Respond ONLY with valid JSON. No markdown, no code blocks, no explanations."""
@@ -123,12 +131,12 @@ IMPORTANT: Respond ONLY with valid JSON. No markdown, no code blocks, no explana
 
 
 # Singleton instance
-_client: Optional[GeminiClient] = None
+_client: Optional[GroqClient] = None
 
 
-def get_llm_client() -> GeminiClient:
+def get_llm_client() -> GroqClient:
     """Get or create the singleton LLM client."""
     global _client
     if _client is None:
-        _client = GeminiClient()
+        _client = GroqClient()
     return _client

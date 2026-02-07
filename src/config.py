@@ -16,6 +16,7 @@ class Config:
     """Central configuration for the Evermemos system."""
     
     # API Keys
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     QDRANT_API_KEY: str = os.getenv("QDRANT_API_KEY", "")
     
@@ -29,7 +30,12 @@ class Config:
     EMBEDDING_DIMENSION: int = 1536
     
     # LLM Configuration (API)
-    GEMINI_MODEL: str = "models/gemini-2.5-flash"  # Latest Gemini model
+    LLM_PROVIDER: str = "groq"  # "groq" or "gemini"
+    GROQ_MODEL: str = "mixtral-8x7b-32768"  # Faster, higher limits than llama-70b
+    GEMINI_MODEL: str = "models/gemini-2.5-flash"  # Fallback
+    
+    # Optimization: Skip boundary detection for short conversations
+    SKIP_BOUNDARY_DETECTION_THRESHOLD: int = 10  # Treat as 1 episode if <= 10 turns
     
     # Semantic Boundary Detection
     SLIDING_WINDOW_SIZE: int = 5  # Number of turns to analyze
@@ -50,8 +56,8 @@ class Config:
     @classmethod
     def validate(cls) -> bool:
         """Validate that all required configuration is present."""
-        if not cls.GEMINI_API_KEY:
-            raise ValueError("GEMINI_API_KEY not found in environment")
+        if not cls.GROQ_API_KEY:
+            raise ValueError("GROQ_API_KEY not found in environment")
         if not cls.QDRANT_API_KEY:
             raise ValueError("QDRANT_API_KEY not found in environment")
         return True
