@@ -15,7 +15,7 @@ load_dotenv(env_path)
 class Config:
     """Central configuration for the Evermemos system."""
     
-    # API Keys
+    # API Keys (optional now - Ollama doesn't need keys)
     GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     QDRANT_API_KEY: str = os.getenv("QDRANT_API_KEY", "")
@@ -29,13 +29,19 @@ class Config:
     EMBEDDING_MODEL: str = "Alibaba-NLP/gte-Qwen2-1.5B-instruct"  # Local Qwen model
     EMBEDDING_DIMENSION: int = 1536
     
-    # LLM Configuration (API)
-    LLM_PROVIDER: str = "groq"  # "groq" or "gemini"
-    GROQ_MODEL: str = "mixtral-8x7b-32768"  # Faster, higher limits than llama-70b
-    GEMINI_MODEL: str = "models/gemini-2.5-flash"  # Fallback
+    # LLM Configuration
+    LLM_PROVIDER: str = "ollama"  # "ollama" (local), "groq", or "gemini"
+    
+    # Ollama Configuration (LOCAL - no rate limits!)
+    OLLAMA_MODEL: str = "qwen2.5:7b"  # Local model you downloaded
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    
+    # Groq Configuration (fallback)
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    GEMINI_MODEL: str = "models/gemini-2.5-flash"
     
     # Optimization: Skip boundary detection for short conversations
-    SKIP_BOUNDARY_DETECTION_THRESHOLD: int = 10  # Treat as 1 episode if <= 10 turns
+    SKIP_BOUNDARY_DETECTION_THRESHOLD: int = 3  # Treat as 1 episode if <= 3 turns
     
     # Semantic Boundary Detection
     SLIDING_WINDOW_SIZE: int = 5  # Number of turns to analyze
@@ -56,8 +62,7 @@ class Config:
     @classmethod
     def validate(cls) -> bool:
         """Validate that all required configuration is present."""
-        if not cls.GROQ_API_KEY:
-            raise ValueError("GROQ_API_KEY not found in environment")
+        # Only check Qdrant - Ollama doesn't need API keys
         if not cls.QDRANT_API_KEY:
             raise ValueError("QDRANT_API_KEY not found in environment")
         return True

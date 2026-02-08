@@ -343,33 +343,149 @@ MAX_QUERY_REWRITES = 3
 ### Problem
 
 Free tier LLMs have strict limits:
-- Groq: 30 req/min, 14,400 req/day
+- Groq: 30 req/min, 100,000 tokens/day
 
-### Solutions Implemented
+---
+
+## Complete LLM Calls Breakdown
+
+### Phase 1: Episodic Trace Formation
+
+| Task | Method | LLM Call? | Notes |
+|------|--------|-----------|-------|
+| **Parse transcript** | Regex parsing | ❌ No | Simple string operations |
+| **Boundary detection** (≤3 turns) | Skip entirely | ❌ No | Treat as 1 episode |
+| **Boundary detection** (>3 turns) | LLM call | ✅ **Yes** | Detects topic shifts |
+| **Narrative + Extraction** (≤3 turns) | Simple concatenation | ❌ No | Uses `_process_segment_simple()` |
+| **Narrative + Extraction** (>3 turns) | Combined LLM call | ✅ **Yes** | Single prompt for both |
+| **Generate embeddings** | Local Qwen model | ❌ No | Runs on CPU/GPU locally |
+
+### Phase 2: Semantic Consolidation
+
+| Task | Method | LLM Call? | Notes |
+|------|--------|-----------|-------|
+| **Cosine similarity calculation** | NumPy math | ❌ No | Vector operations |
+| **Scene clustering decision** | Threshold check | ❌ No | Compare similarity to 0.70 |
+| **Generate theme** (new scene) | LLM call | ✅ **Yes** | Creates "Health", "Career" etc |
+| **Update scene summary** (existing scene) | LLM call | ✅ **Yes** | Called every assimilation |
+| **Extract profile data** | LLM call | ✅ **Yes** | Gets facts/traits from scene |
+| **Conflict detection** | Python logic | ❌ No | Compares old vs new values |
+| **Trait similarity check** | Word overlap | ❌ No | Simple set intersection |
+
+### Phase 3: Reconstructive Recollection
+
+| Task | Method | LLM Call? | Notes |
+|------|--------|-----------|-------|
+| **BM25 keyword search** | rank-bm25 library | ❌ No | Keyword matching |
+| **Vector search** | Qdrant + embeddings | ❌ No | Semantic similarity |
+| **RRF score fusion** | Math formula | ❌ No | Combines BM25 + vector |
+| **Temporal filtering** | Python datetime | ❌ No | Check foresight validity |
+| **Query rewriting** | LLM call | ✅ **Yes** | Expands failed queries |
+| **Generate answer** | LLM call | ✅ **Yes** | Final response synthesis |
+
+---
+
+## LLM Calls Per Operation
+
+### Ingesting a Conversation
+
+```
+SHORT CONVERSATION (≤3 turns):
+├── Parse transcript      → 0 LLM calls
+├── Boundary detection    → 0 LLM calls (skipped)
+├── Narrative/Extraction  → 0 LLM calls (simple mode)
+├── Generate embeddings   → 0 LLM calls (local)
+├── Scene clustering      → 0 LLM calls (math only)
+├── Generate theme        → 1 LLM call
+├── Update scene summary  → 0-1 LLM call (only if assimilating)
+└── Extract profile       → 1 LLM call
+TOTAL: 2-3 LLM calls
+
+LONG CONVERSATION (>3 turns):
+├── Parse transcript      → 0 LLM calls
+├── Boundary detection    → N LLM calls (N = windows analyzed)
+├── Narrative/Extraction  → 1 LLM call per episode
+├── Generate embeddings   → 0 LLM calls (local)
+├── Scene clustering      → 0 LLM calls (math only)
+├── Generate theme        → 1 LLM call per new scene
+├── Update scene summary  → 1 LLM call per assimilation
+└── Extract profile       → 1 LLM call per scene
+TOTAL: 5-15+ LLM calls
+```
+
+### Answering a Query
+
+```
+├── Embed query           → 0 LLM calls (local)
+├── BM25 search          → 0 LLM calls
+├── Vector search        → 0 LLM calls
+├── RRF fusion           → 0 LLM calls
+├── Temporal filtering   → 0 LLM calls
+├── Query rewriting      → 0-3 LLM calls (only if needed)
+└── Generate answer      → 1 LLM call
+TOTAL: 1-4 LLM calls
+```
+
+---
+
+## Biggest LLM Consumers
+
+The operations that consume the most API quota:
+
+1. **`_update_scene_summary()`** - Called every time a MemCell joins an existing scene
+2. **`_extract_profile_data()`** - Called for every scene processed
+3. **`_generate_theme()`** - Called for every new scene created
+4. **Boundary detection** - Called for each sliding window (long conversations only)
+
+With 4 test conversations, that's potentially 12+ LLM calls just for Phase 2!
+
+---
+
+## Optimizations Implemented
 
 | Optimization | Effect | Implementation |
 |--------------|--------|----------------|
-| **Skip boundary detection** | -2-4 calls/conversation | If ≤10 turns, treat as 1 episode |
+| **Skip boundary detection** | -2-4 calls/conversation | If ≤3 turns, treat as 1 episode |
 | **Combined prompts** | -50% calls | Narrative + extraction in 1 call |
-| **Use Mixtral** | 5x higher limits | Faster model with more quota |
+| **Simple mode for short convos** | -100% Phase 1 calls | No LLM for ≤3 turns |
 | **Local embeddings** | 0 embedding calls | Qwen runs locally |
+| **Retry with backoff** | Better reliability | Exponential delay on rate limits |
 
 ### Before vs After
 
 ```
-BEFORE (per 10-turn conversation):
-- Boundary detection: 5 calls
+BEFORE (per 5-turn conversation):
+- Boundary detection: 0 calls (short)
 - Narrative synthesis: 1 call
 - Fact extraction: 1 call
+- Scene theme: 1 call
+- Scene summary: 1 call
+- Profile extraction: 1 call
 - Query + answer: 2 calls
-Total: 9 LLM calls
+Total: 7 LLM calls
 
 AFTER:
 - Boundary detection: 0 calls (skipped)
-- Combined prompt: 1 call
+- Combined prompt: 0 calls (simple mode for ≤3 turns)
+- Scene theme: 1 call
+- Scene summary: 1 call
+- Profile extraction: 1 call
 - Query + answer: 2 calls
-Total: 3 LLM calls (67% reduction)
+Total: 5 LLM calls (29% reduction)
 ```
+
+---
+
+## Remaining Optimization Opportunities
+
+These could further reduce LLM usage:
+
+1. ❌ Skip `_update_scene_summary()` for first few MemCells in a scene
+2. ❌ Skip `_extract_profile_data()` for scenes with only 1 MemCell
+3. ❌ Cache similar theme generations
+4. ❌ Batch multiple scenes into single profile extraction call
+5. ❌ Use smaller/faster models for simple tasks
+
 
 ---
 

@@ -409,8 +409,11 @@ class EpisodicTraceFormation:
                                    current_time: datetime) -> MemCell:
         """
         OPTIMIZATION: Process a segment with a single combined LLM call.
-        This replaces the separate narrative_synthesizer.synthesize() + memcell_extractor.extract() calls.
+        For very short conversations (<=3 turns), use simple extraction without LLM.
         """
+        # OPTIMIZATION: For very short conversations, skip LLM entirely
+        if len(turns) <= 3:
+            return self._process_segment_simple(turns, conversation_id, current_time)
         # Format dialogue
         dialogue_text = "\n".join([f"{t.speaker}: {t.content}" for t in turns])
         
@@ -478,6 +481,39 @@ Extract key information accurately and completely."""
             episode=result.get("episode", ""),
             atomic_facts=result.get("atomic_facts", []),
             foresights=foresights,
+            metadata=metadata
+        )
+    
+    def _process_segment_simple(self, turns: list, conversation_id: str,
+                                 current_time: datetime) -> MemCell:
+        """
+        Simple extraction for very short conversations (no LLM call).
+        Just concatenates the dialogue as the episode.
+        """
+        # Create simple episode from dialogue
+        episode_parts = []
+        for turn in turns:
+            episode_parts.append(f"{turn.speaker.capitalize()} said: {turn.content}")
+        episode = " ".join(episode_parts)
+        
+        # Extract simple facts (just the content)
+        atomic_facts = [turn.content for turn in turns if turn.speaker.lower() == "user"]
+        
+        turn_range = (turns[0].turn_id, turns[-1].turn_id) if turns else (0, 0)
+        
+        metadata = Metadata(
+            created_at=current_time,
+            updated_at=current_time,
+            source_conversation_id=conversation_id,
+            turn_range=turn_range,
+            participant_ids=list(set(t.speaker for t in turns)),
+            tags=["short_conversation"]
+        )
+        
+        return MemCell(
+            episode=episode,
+            atomic_facts=atomic_facts,
+            foresights=[],
             metadata=metadata
         )
     
