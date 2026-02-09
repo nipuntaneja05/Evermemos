@@ -290,17 +290,30 @@ Extract and respond with JSON:
         {{
             "content": "The plan/intention/temporary state",
             "duration_type": "fixed|ongoing|indefinite",
-            "duration_value": "number of days/weeks if fixed, null otherwise",
-            "start_offset_days": 0
+            "duration_value": "number of days/weeks if fixed (e.g., 14 for 2 weeks), null otherwise",
+            "start_offset_days": 0,
+            "expiry_date": "YYYY-MM-DD format if determinable from context, null otherwise"
         }},
         ...
     ],
     "tags": ["tag1", "tag2", ...]
 }}
 
-Rules:
+IMPORTANT FORESIGHT EXTRACTION RULES:
+1. ALWAYS try to extract temporal bounds from the conversation
+2. Look for phrases like: "next month", "2 weeks", "in March", "until Friday", "for a year"
+3. Convert relative times to actual dates using CURRENT TIME as reference:
+   - "next week" = 7 days from current time
+   - "next month" = 30 days from current time  
+   - "in 2 weeks" = 14 days, expiry_date = current + 14 days
+   - "for a year" = 365 days
+4. For medical treatments (antibiotics, prescriptions): typical duration is 7-14 days
+5. For trips/vacations: extract the specific dates or duration mentioned
+6. For learning goals, career plans: use "ongoing" if no end date specified
+7. If expiry_date can be calculated, ALWAYS include it in YYYY-MM-DD format
+
+Rules for atomic facts:
 - Atomic facts should be independently verifiable
-- For foresights, infer duration when possible (e.g., "5-day detox" = fixed, 5 days)
 - Tags should be high-level categories"""
         
         result = self.llm.generate_json(prompt, self.SYSTEM_PROMPT)
@@ -332,21 +345,32 @@ Rules:
         except (TypeError, ValueError):
             t_start = current_time
         
-        if duration_type == "fixed":
-            duration_value = f_data.get("duration_value")
-            if duration_value:
-                try:
-                    t_end = t_start + timedelta(days=float(duration_value))
-                except:
-                    t_end = None
-            else:
+        # First, check if LLM provided an explicit expiry_date
+        expiry_date_str = f_data.get("expiry_date")
+        if expiry_date_str and expiry_date_str != "null" and expiry_date_str != "None":
+            try:
+                # Parse YYYY-MM-DD format
+                t_end = datetime.strptime(str(expiry_date_str)[:10], "%Y-%m-%d")
+                # Preserve time component from current_time
+                t_end = t_end.replace(hour=23, minute=59, second=59)
+            except (ValueError, TypeError):
                 t_end = None
-        elif duration_type == "ongoing":
-            # Ongoing but not indefinite - set a review period
-            t_end = t_start + timedelta(days=30)  # Default 30-day review
         else:
-            # Indefinite
             t_end = None
+        
+        # Fallback: calculate from duration if expiry_date wasn't provided
+        if t_end is None:
+            if duration_type == "fixed":
+                duration_value = f_data.get("duration_value")
+                if duration_value:
+                    try:
+                        t_end = t_start + timedelta(days=float(duration_value))
+                    except:
+                        t_end = None
+            elif duration_type == "ongoing":
+                # Ongoing but not indefinite - set a review period
+                t_end = t_start + timedelta(days=30)  # Default 30-day review
+            # else: indefinite, t_end stays None
         
         return Foresight(
             content=content,

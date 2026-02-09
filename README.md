@@ -1,8 +1,28 @@
 # Evermemos 🧠
 
 **Advanced Memory System with Episodic Trace Formation, Semantic Consolidation, and Reconstructive Recollection**
+Please Refer README.md and DESIGN.md
 
 Evermemos is a sophisticated memory system that transforms conversation transcripts into structured, searchable memory units. Inspired by biological memory consolidation, it organizes episodic memories into thematic clusters and provides intelligent retrieval with temporal awareness.
+
+---
+
+## 📊 Scale Evaluation Results (500 Conversations)
+
+| Metric | Value |
+|--------|-------|
+| **MemCells Created** | 495 |
+| **MemScenes Formed** | 43 (semantic clusters) |
+| **Conflicts Detected** | 455 |
+| **Deduplication Rate** | 84.8% |
+| **Foresights Tracked** | 716 (temporal plans) |
+| **Implicit Traits** | 276 (profile evolution) |
+| **Ingestion Time** | 132 minutes (15.8s/conversation) |
+| **Avg Retrieval Latency** | 4.1 seconds |
+
+✅ **All core features verified**: Conflict detection, deduplication, temporal filtering, retrieval relevance, and scalability from 100→500 conversations.
+
+---
 
 ## 🏗️ Architecture Overview
 
@@ -18,7 +38,7 @@ Transcript → Semantic Segmentation → Narrative Synthesis → MemCell Extract
 
 - **Contextual Segmentation**: Sliding window analysis with LLM-based topic shift detection
 - **Narrative Synthesis**: Third-person narrative rewriting that resolves coreferences
-- **Structural Derivation**: Extraction of Episodes, Atomic Facts, and Foresights
+- **Structural Derivation**: Extraction of Episodes, Atomic Facts, and Foresights with temporal bounds
 
 ### Phase II: Semantic Consolidation
 
@@ -28,7 +48,7 @@ Organizes MemCells into higher-order structures called **MemScenes**.
 MemCell → Vector Embedding → Incremental Clustering → Profile Evolution
 ```
 
-- **Incremental Clustering**: Online mechanism using cosine similarity with threshold τ
+- **Incremental Clustering**: Online mechanism using cosine similarity with threshold τ (0.70)
 - **Scene-Driven Profile Evolution**: Updates user profile with conflict detection
 - **Recency-Aware Resolution**: Latest evidence takes precedence
 
@@ -43,6 +63,8 @@ Query → Hybrid Retrieval (RRF) → Temporal Filtering → Sufficiency Check �
 - **Hybrid Search**: Dense (semantic) + Sparse (BM25) with Reciprocal Rank Fusion
 - **Temporal Filtering**: Validates Foresight signals against current timestamp
 - **Agentic Verification**: LLM-based sufficiency check with query rewriting loop
+
+---
 
 ## 📦 Data Structures
 
@@ -70,6 +92,8 @@ Compact representation with:
 - **Implicit Traits**: Preferences, habits, personality traits
 - **Conflict History**: Record of detected and resolved conflicts
 
+---
+
 ## 🚀 Quick Start
 
 ### 1. Installation
@@ -79,14 +103,24 @@ cd Evermemos
 pip install -r requirements.txt
 ```
 
-### 2. Configuration
+### 2. Environment Setup
 
-The system requires:
-- `GEMINI_API_KEY` - Google Gemini API key
-- `QDRANT_API_KEY` - Qdrant Cloud API key
-- `QDRANT_URL` - Qdrant cluster endpoint
+Create a `.env` file with the following API keys:
 
-These should be in your `.env` file.
+```bash
+# For Scale Evaluations (Groq - Fast & High Quality)
+GROQ_API_KEY=your_groq_api_key
+
+# For Embeddings (Local Model - No API needed)
+# Using Alibaba-NLP/gte-Qwen2-1.5B-instruct (downloaded automatically)
+
+# Vector Database (Qdrant Cloud)
+QDRANT_API_KEY=your_qdrant_api_key
+QDRANT_URL=your_qdrant_cluster_url
+
+# Optional: For local testing with Ollama
+# (System automatically downloads qwen2.5:3b)
+```
 
 ### 3. Run the Demo
 
@@ -99,6 +133,8 @@ Or run a quick test:
 ```bash
 python main.py --test
 ```
+
+---
 
 ## 💻 Usage
 
@@ -145,6 +181,7 @@ print(f"Context:\n{result['context']}")
 # Get user profile
 profile = memory.get_profile()
 print(f"Explicit facts: {list(profile.explicit_facts.keys())}")
+print(f"Implicit traits: {len(profile.implicit_traits)}")
 
 # Export memory
 memory.export_memory_json("backup.json")
@@ -166,12 +203,19 @@ for mc in contents["memcells"]:
     print(f"Facts: {mc.atomic_facts}")
 ```
 
+---
+
 ## 🔧 Configuration
 
 Edit `src/config.py` to customize:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
+| `LLM_PROVIDER` | `"groq"` | LLM provider: `"groq"`, `"ollama"`, or `"gemini"` |
+| `GROQ_MODEL` | `"llama-3.3-70b-versatile"` | Groq model for scale evaluations |
+| `OLLAMA_MODEL` | `"qwen2.5:3b"` | Ollama model for local testing |
+| `EMBEDDING_PROVIDER` | `"local"` | Embedding provider: `"local"` or `"gemini"` |
+| `LOCAL_EMBEDDING_MODEL` | `"Alibaba-NLP/gte-Qwen2-1.5B-instruct"` | Local embedding model |
 | `SLIDING_WINDOW_SIZE` | 5 | Turns to analyze for boundary detection |
 | `TOPIC_SHIFT_THRESHOLD` | 0.7 | Confidence threshold for topic shifts |
 | `MEMSCENE_SIMILARITY_THRESHOLD` | 0.70 | τ for scene clustering |
@@ -180,25 +224,63 @@ Edit `src/config.py` to customize:
 | `RRF_K` | 60 | RRF fusion constant |
 | `MAX_QUERY_REWRITES` | 3 | Maximum rewrite iterations |
 
-## 📁 Project Structure
+---
+
+## �️ Technologies
+
+### LLM Strategy
+
+We use different LLMs optimized for different tasks:
+
+| Use Case | LLM Provider | Model | Rationale |
+|----------|-------------|-------|-----------|
+| **Scale Evaluations** | Groq | `llama-3.3-70b-versatile` | Fast API, high quality output, paid tier for rate limits |
+| **Local Testing** | Ollama | `qwen2.5:3b` | Fully local, no API costs, good for quick tests |
+| **Embeddings** | Local | `Alibaba-NLP/gte-Qwen2-1.5B-instruct` | No API costs, 1.5B params, excellent quality |
+
+### Tech Stack
+
+- **Vector Database**: Qdrant Cloud (with retry logic for transient errors)
+- **Sparse Retrieval**: BM25 (rank-bm25)
+- **Framework**: Python 3.10+
+- **Dependencies**: sentence-transformers, transformers, groq, rich, python-dotenv
+
+---
+
+## �📁 Project Structure
 
 ```
 Evermemos/
-├── .env                       # API keys and configuration
-├── requirements.txt           # Python dependencies
-├── main.py                    # Entry point
+├── .env                           # API keys and configuration
+├── requirements.txt               # Python dependencies
+├── main.py                        # Entry point
+├── data/
+│   └── conversations/             # Evaluation datasets
+│       ├── conversations_100.json
+│       ├── conversations_300.json
+│       └── conversations_500.json
+├── results/
+│   ├── scale_evaluation_results100.md
+│   ├── scale_evaluation_results300.md
+│   └── scale_evaluation_results500.md
+├── tests/
+│   ├── scale_evaluation.py        # Main evaluation script
+│   ├── scale_evaluation_300.py    # 500-conversation evaluation
+│   └── test_scenarios.py          # Feature test scenarios
 └── src/
     ├── __init__.py
-    ├── config.py              # Configuration management
-    ├── models.py              # Data structures (MemCell, MemScene, etc.)
-    ├── llm_client.py          # Gemini API client
-    ├── vector_store.py        # Qdrant integration
-    ├── phase1_episodic.py     # Episodic Trace Formation
-    ├── phase2_consolidation.py # Semantic Consolidation
-    ├── phase3_recollection.py  # Reconstructive Recollection
-    ├── evermemos.py           # Main orchestrator
-    └── demo.py                # Interactive demo
+    ├── config.py                  # Configuration management
+    ├── models.py                  # Data structures (MemCell, MemScene, etc.)
+    ├── llm_client.py              # Multi-provider LLM client
+    ├── vector_store.py            # Qdrant integration
+    ├── phase1_episodic.py         # Episodic Trace Formation
+    ├── phase2_consolidation.py    # Semantic Consolidation
+    ├── phase3_recollection.py     # Reconstructive Recollection
+    ├── evermemos.py               # Main orchestrator
+    └── demo.py                    # Interactive demo
 ```
+
+---
 
 ## 🔑 Key Features
 
@@ -212,6 +294,8 @@ result = memory.query("Is user on a detox?", current_time=now)
 # Foresight "User on 7-day detox" is only returned within those 7 days
 ```
 
+**Scale Evaluation Result**: 716 foresights tracked across 500 conversations
+
 ### ✅ Conflict Detection
 
 Automatic detection and resolution of conflicting information:
@@ -220,6 +304,20 @@ Automatic detection and resolution of conflicting information:
 # When weight changes from 180 to 175, system detects and resolves:
 # ConflictRecord(attribute="weight", old="180", new="175", resolution="recency")
 ```
+
+**Scale Evaluation Result**: 455 conflicts detected and resolved across 500 conversations
+
+### ✅ Deduplication (Storage Optimization)
+
+System automatically consolidates duplicate facts:
+
+```python
+# 2277 raw facts → 347 unique facts
+# Deduplication rate: 84.8%
+# Storage saved: ~85% reduction
+```
+
+**Impact**: Massive storage savings while preserving all unique information
 
 ### ✅ Hybrid Retrieval
 
@@ -230,6 +328,8 @@ Combines semantic understanding with keyword matching:
 # Sparse: "180 pounds" matches exactly
 # RRF: Fuses both for optimal results
 ```
+
+**Scale Evaluation Result**: 8 relevant episodes retrieved per query with 4.1s avg latency
 
 ### ✅ Agentic Verification
 
@@ -243,36 +343,132 @@ Automatically expands queries when context is insufficient:
 # - "technology locations to visit"
 ```
 
-## 🛠️ Technologies
+**Result**: Iterative query expansion ensures comprehensive answers
 
-- **LLM**: Google Gemini 2.0 Flash
-- **Embeddings**: Gemini text-embedding-004
-- **Vector Database**: Qdrant Cloud
-- **Sparse Retrieval**: BM25 (rank-bm25)
-- **Framework**: Python 3.10+
+### ✅ Profile Evolution
 
-## 📊 System Stats
-
-Check system status:
+System builds a comprehensive user profile from conversations:
 
 ```python
-stats = memory.get_stats()
-# {
-#   "user_id": "demo_user",
-#   "memcells_count": 15,
-#   "memscenes_count": 3,
-#   "vector_dimensions": 768
-# }
+profile = memory.get_profile()
+# 276 implicit traits inferred from 500 conversations
+# e.g., "health-conscious", "loves photography", "remote worker"
 ```
+
+---
+
+## 📊 Running Scale Evaluations
+
+### Test Scenarios (Local)
+
+Quick feature tests using Ollama (local LLM):
+
+```bash
+python tests/test_scenarios.py
+```
+
+Uses `qwen2.5:3b` for fast local testing without API costs.
+
+### Scale Evaluation (Cloud)
+
+Large-scale evaluation using Groq API:
+
+```bash
+# 100 conversations
+python tests/scale_evaluation.py
+
+# 500 conversations
+python tests/scale_evaluation_300.py
+```
+
+Uses `llama-3.3-70b-versatile` via Groq for high-quality, fast processing.
+
+**Results saved to**: `results/scale_evaluation_results{N}.md`
+
+---
+
+## 🎯 Performance Characteristics
+
+### Ingestion Performance
+
+| Scale | Time | Rate |
+|-------|------|------|
+| 100 conversations | ~26 min | 1 conversation every 15.6s |
+| 300 conversations | ~77 min | 1 conversation every 15.4s |
+| 500 conversations | ~132 min | 1 conversation every 15.8s |
+
+**Observation**: Consistent ~15.5s per conversation regardless of scale (excellent scalability)
+
+### Retrieval Performance
+
+- **Average Latency**: 4.1 seconds
+- **Breakdown**:
+  - Embedding generation: ~50-100ms
+  - Qdrant search: ~100-500ms
+  - LLM sufficiency check: ~1-2s
+  - Query rewrite (if needed): ~1-2s
+  - Context building: ~100ms
+
+**Main bottleneck**: LLM API calls for sufficiency verification (can be optimized by skipping or using faster models)
+
+### Storage Efficiency
+
+- **Deduplication**: 84.8% reduction in storage
+- **Vector Database**: Qdrant Cloud (scalable)
+- **Embeddings**: 1536 dimensions (gte-Qwen2-1.5B-instruct)
+
+---
+
+## 🧪 Testing
+
+### Feature Tests
+
+```bash
+python tests/test_scenarios.py
+```
+
+Tests:
+- Foresight expiry tracking
+- Conflict detection and resolution
+- Profile evolution
+- Deduplication
+- Retrieval relevance
+
+### Scale Tests
+
+```bash
+# Small scale (quick test)
+python tests/scale_evaluation.py
+
+# Large scale (full evaluation)
+python tests/scale_evaluation_300.py
+```
+
+Comprehensive metrics:
+- MemCells created
+- MemScenes formed
+- Conflicts detected
+- Deduplication rate
+- Foresights tracked
+- Profile evolution
+- Retrieval latency
+- Sample query relevance
+
+---
 
 ## 🔮 Future Enhancements
 
+- [ ] Improve foresight expiry date extraction (currently many show N/A)
+- [ ] Add explicit profile attributes extraction
 - [ ] Multi-user support with isolation
 - [ ] REST API server
 - [ ] Web interface
 - [ ] Memory importance scoring
 - [ ] Forgetting curve implementation
 - [ ] Cross-session learning
+- [ ] Query latency optimization (skip sufficiency check for simple queries)
+
+---
 
 ## 📄 License
 
@@ -280,4 +476,6 @@ MIT License
 
 ---
 
-**Built with ❤️ using Gemini AI and Qdrant**
+**Built using Groq (Llama 3.3 70B), Ollama (Qwen 2.5 3B), and Qdrant**
+
+*Scale evaluation: 500 conversations, 495 MemCells, 84.8% deduplication, 455 conflicts resolved ✅*

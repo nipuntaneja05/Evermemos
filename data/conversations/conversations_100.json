@@ -1,0 +1,5146 @@
+[
+  {
+    "conversation_id": "conv_0042",
+    "timestamp": "2025-11-11T03:15:07.411826",
+    "topic": "marathon_training",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm training for a marathon next year.",
+        "timestamp": "2025-11-11T03:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Wow! That's a big goal. Which marathon?",
+        "timestamp": "2025-11-11T03:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The Chicago Marathon in October.",
+        "timestamp": "2025-11-11T03:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Great choice! What's your training plan?",
+        "timestamp": "2025-11-11T03:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Running 50 miles a week, gradually increasing to 70.",
+        "timestamp": "2025-11-11T03:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's serious mileage! What's your goal time?",
+        "timestamp": "2025-11-11T03:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Hoping to finish under 4 hours. We'll see!",
+        "timestamp": "2025-11-11T03:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0031",
+    "timestamp": "2025-11-11T11:15:07.411826",
+    "topic": "antibiotics",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 10,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got prescribed antibiotics yesterday for a chest infection.",
+        "timestamp": "2025-11-11T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "I hope you feel better soon! How long is the course?",
+        "timestamp": "2025-11-11T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "10 days. Doctor said to avoid alcohol during treatment.",
+        "timestamp": "2025-11-11T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's standard advice. Make sure to complete the full course!",
+        "timestamp": "2025-11-11T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Definitely. I'm also supposed to take them with food.",
+        "timestamp": "2025-11-11T11:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0008",
+    "timestamp": "2025-11-11T19:15:07.411826",
+    "topic": "juice_cleanse",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 5,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Starting a 5-day juice cleanse tomorrow.",
+        "timestamp": "2025-11-11T19:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a commitment! What made you decide to do it?",
+        "timestamp": "2025-11-11T19:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Want to reset after the holidays. No solid food for 5 days.",
+        "timestamp": "2025-11-11T19:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Make sure you're getting enough calories from the juices!",
+        "timestamp": "2025-11-11T19:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I have a plan - green juices, fruit juices, and some vegetable broth.",
+        "timestamp": "2025-11-11T19:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0036",
+    "timestamp": "2025-11-12T03:15:07.411826",
+    "topic": "job_search",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm thinking about switching to a new company.",
+        "timestamp": "2025-11-12T03:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "What's prompting the change?",
+        "timestamp": "2025-11-12T03:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The startup I'm at is not doing well. Might need to look for stability.",
+        "timestamp": "2025-11-12T03:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That makes sense. Have you started interviewing?",
+        "timestamp": "2025-11-12T03:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I have an interview at Google next week.",
+        "timestamp": "2025-11-12T03:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Google! That's amazing. What team?",
+        "timestamp": "2025-11-12T03:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "YouTube backend engineering. Really excited about it.",
+        "timestamp": "2025-11-12T03:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0053",
+    "timestamp": "2025-11-12T11:15:07.411826",
+    "topic": "diet_change",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been thinking about changing my diet lately.",
+        "timestamp": "2025-11-12T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's great! What kind of changes are you considering?",
+        "timestamp": "2025-11-12T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "I want to try going vegetarian. I've heard it's healthier.",
+        "timestamp": "2025-11-12T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Vegetarian diets can be very nutritious! Are you planning to cut out all meat?",
+        "timestamp": "2025-11-12T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, no more chicken, beef, or pork. Maybe I'll keep fish though.",
+        "timestamp": "2025-11-12T11:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "So more of a pescatarian approach! That's a great way to start.",
+        "timestamp": "2025-11-12T11:25:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0098",
+    "timestamp": "2025-11-13T21:15:07.411826",
+    "topic": "moving_in_together",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm moving in with my partner next month.",
+        "timestamp": "2025-11-13T21:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a big step! Are you excited?",
+        "timestamp": "2025-11-13T21:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Very! We found a great apartment with two bedrooms.",
+        "timestamp": "2025-11-13T21:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two bedrooms - is one for an office?",
+        "timestamp": "2025-11-13T21:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, we both work from home sometimes. Plus rent is $2,400.",
+        "timestamp": "2025-11-13T21:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's reasonable! What area?",
+        "timestamp": "2025-11-13T21:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Downtown, walking distance to everything.",
+        "timestamp": "2025-11-13T21:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0019",
+    "timestamp": "2025-11-14T11:15:07.411826",
+    "topic": "parents_visiting",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 30,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My parents are visiting next month.",
+        "timestamp": "2025-11-14T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's nice! How long will they stay?",
+        "timestamp": "2025-11-14T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About 2 weeks. They live in Florida so I don't see them often.",
+        "timestamp": "2025-11-14T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two weeks is a good visit! Any plans?",
+        "timestamp": "2025-11-14T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Taking them to see the city, maybe a day trip to the mountains.",
+        "timestamp": "2025-11-14T11:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0069",
+    "timestamp": "2025-11-14T14:15:07.411826",
+    "topic": "sister_wedding",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 120,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My sister is getting married in June!",
+        "timestamp": "2025-11-14T14:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How exciting! Are you in the wedding party?",
+        "timestamp": "2025-11-14T14:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, I'm the maid of honor. Lots of planning to do.",
+        "timestamp": "2025-11-14T14:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big responsibility! Have you started planning the bachelorette?",
+        "timestamp": "2025-11-14T14:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "We're thinking Nashville for a weekend trip.",
+        "timestamp": "2025-11-14T14:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0035",
+    "timestamp": "2025-11-16T08:15:07.411826",
+    "topic": "promotion",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got promoted to senior engineer today!",
+        "timestamp": "2025-11-16T08:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge accomplishment!",
+        "timestamp": "2025-11-16T08:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! It comes with a 20% raise too.",
+        "timestamp": "2025-11-16T08:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Well deserved! What will your new responsibilities include?",
+        "timestamp": "2025-11-16T08:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Leading a team of 5 developers and architecting new features.",
+        "timestamp": "2025-11-16T08:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's exciting! Are you looking forward to the leadership aspect?",
+        "timestamp": "2025-11-16T08:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely. I've been mentoring juniors informally anyway.",
+        "timestamp": "2025-11-16T08:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0007",
+    "timestamp": "2025-11-21T05:15:07.411826",
+    "topic": "shellfish_allergy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just found out I'm allergic to shellfish.",
+        "timestamp": "2025-11-21T05:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh no! How did you discover that?",
+        "timestamp": "2025-11-21T05:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Had a reaction after eating shrimp. Had to go to urgent care.",
+        "timestamp": "2025-11-21T05:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That must have been scary! Do you have an EpiPen now?",
+        "timestamp": "2025-11-21T05:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, doctor prescribed one. I need to carry it everywhere.",
+        "timestamp": "2025-11-21T05:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's very important. Will you need to avoid all shellfish?",
+        "timestamp": "2025-11-21T05:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, crab, lobster, shrimp - all of it. Forever, apparently.",
+        "timestamp": "2025-11-21T05:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0073",
+    "timestamp": "2025-11-21T10:15:07.411826",
+    "topic": "japan_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 90,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm planning a trip to Japan next spring.",
+        "timestamp": "2025-11-21T10:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Japan in spring! Cherry blossoms?",
+        "timestamp": "2025-11-21T10:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Exactly! Planning for late March, 2 weeks.",
+        "timestamp": "2025-11-21T10:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Which cities will you visit?",
+        "timestamp": "2025-11-21T10:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Tokyo, Kyoto, Osaka, and maybe Hiroshima.",
+        "timestamp": "2025-11-21T10:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Sounds amazing! Have you been to Japan before?",
+        "timestamp": "2025-11-21T10:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "No, it's my first time. So excited to try authentic ramen!",
+        "timestamp": "2025-11-21T10:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0033",
+    "timestamp": "2025-11-22T00:15:07.411826",
+    "topic": "shellfish_allergy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just found out I'm allergic to shellfish.",
+        "timestamp": "2025-11-22T00:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh no! How did you discover that?",
+        "timestamp": "2025-11-22T00:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Had a reaction after eating shrimp. Had to go to urgent care.",
+        "timestamp": "2025-11-22T00:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That must have been scary! Do you have an EpiPen now?",
+        "timestamp": "2025-11-22T00:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, doctor prescribed one. I need to carry it everywhere.",
+        "timestamp": "2025-11-22T00:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's very important. Will you need to avoid all shellfish?",
+        "timestamp": "2025-11-22T00:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, crab, lobster, shrimp - all of it. Forever, apparently.",
+        "timestamp": "2025-11-22T00:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0003",
+    "timestamp": "2025-11-22T06:15:07.411826",
+    "topic": "meat_eating",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I had the most amazing steak last night at this new restaurant.",
+        "timestamp": "2025-11-22T06:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh nice! Where did you go?",
+        "timestamp": "2025-11-22T06:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "It's called The Grill House downtown. Best ribeye I've ever had.",
+        "timestamp": "2025-11-22T06:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Sounds delicious! Do you eat steak often?",
+        "timestamp": "2025-11-22T06:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Maybe once a week. I love a good quality cut of beef.",
+        "timestamp": "2025-11-22T06:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.411826"
+    }
+  },
+  {
+    "conversation_id": "conv_0028",
+    "timestamp": "2025-11-23T10:15:07.411826",
+    "topic": "vegan_lifestyle",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I made a delicious vegan curry last night.",
+        "timestamp": "2025-11-23T10:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds wonderful! What did you put in it?",
+        "timestamp": "2025-11-23T10:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Chickpeas, coconut milk, tomatoes, and lots of spices.",
+        "timestamp": "2025-11-23T10:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Yum! Are you eating more plant-based meals these days?",
+        "timestamp": "2025-11-23T10:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I've been fully vegan for about 2 months now.",
+        "timestamp": "2025-11-23T10:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's fantastic progress! How are you feeling?",
+        "timestamp": "2025-11-23T10:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Much more energetic honestly. I'm taking B12 supplements too.",
+        "timestamp": "2025-11-23T10:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0087",
+    "timestamp": "2025-11-28T19:15:07.411826",
+    "topic": "promotion",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got promoted to senior engineer today!",
+        "timestamp": "2025-11-28T19:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge accomplishment!",
+        "timestamp": "2025-11-28T19:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! It comes with a 20% raise too.",
+        "timestamp": "2025-11-28T19:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Well deserved! What will your new responsibilities include?",
+        "timestamp": "2025-11-28T19:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Leading a team of 5 developers and architecting new features.",
+        "timestamp": "2025-11-28T19:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's exciting! Are you looking forward to the leadership aspect?",
+        "timestamp": "2025-11-28T19:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely. I've been mentoring juniors informally anyway.",
+        "timestamp": "2025-11-28T19:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0070",
+    "timestamp": "2025-11-30T17:15:07.411826",
+    "topic": "new_puppy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I adopted a puppy yesterday!",
+        "timestamp": "2025-11-30T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Aww! What kind of dog?",
+        "timestamp": "2025-11-30T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "A golden retriever mix. She's 3 months old.",
+        "timestamp": "2025-11-30T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How adorable! What did you name her?",
+        "timestamp": "2025-11-30T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Luna. She's already stolen my heart.",
+        "timestamp": "2025-11-30T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Great name! How's she adjusting to her new home?",
+        "timestamp": "2025-11-30T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Adjusting well! Though she chewed up my favorite shoe already.",
+        "timestamp": "2025-11-30T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0081",
+    "timestamp": "2025-12-01T11:15:07.411826",
+    "topic": "meat_eating",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I had the most amazing steak last night at this new restaurant.",
+        "timestamp": "2025-12-01T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh nice! Where did you go?",
+        "timestamp": "2025-12-01T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "It's called The Grill House downtown. Best ribeye I've ever had.",
+        "timestamp": "2025-12-01T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Sounds delicious! Do you eat steak often?",
+        "timestamp": "2025-12-01T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Maybe once a week. I love a good quality cut of beef.",
+        "timestamp": "2025-12-01T11:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0011",
+    "timestamp": "2025-12-01T16:15:07.411826",
+    "topic": "new_job",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I accepted the offer from Meta!",
+        "timestamp": "2025-12-01T16:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! When do you start?",
+        "timestamp": "2025-12-01T16:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "In 3 weeks. I'm relocating to Menlo Park.",
+        "timestamp": "2025-12-01T16:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big move! Are you excited?",
+        "timestamp": "2025-12-01T16:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Very! My salary will be $180,000 plus stock options.",
+        "timestamp": "2025-12-01T16:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a great package! Will you be working on Instagram or Facebook?",
+        "timestamp": "2025-12-01T16:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Instagram Reels team. Really cutting-edge stuff.",
+        "timestamp": "2025-12-01T16:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0026",
+    "timestamp": "2025-12-01T17:15:07.411826",
+    "topic": "house_purchase",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just bought my first house!",
+        "timestamp": "2025-12-01T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge milestone!",
+        "timestamp": "2025-12-01T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! A 3-bedroom in the suburbs.",
+        "timestamp": "2025-12-01T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How's the commute to work?",
+        "timestamp": "2025-12-01T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "About 30 minutes. Worth it for the space.",
+        "timestamp": "2025-12-01T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "What was the purchase price if you don't mind me asking?",
+        "timestamp": "2025-12-01T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "We paid $450,000. Mortgage is about $2,800/month.",
+        "timestamp": "2025-12-01T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0001",
+    "timestamp": "2025-12-02T10:15:07.411826",
+    "topic": "diet_change",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been thinking about changing my diet lately.",
+        "timestamp": "2025-12-02T10:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's great! What kind of changes are you considering?",
+        "timestamp": "2025-12-02T10:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "I want to try going vegetarian. I've heard it's healthier.",
+        "timestamp": "2025-12-02T10:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Vegetarian diets can be very nutritious! Are you planning to cut out all meat?",
+        "timestamp": "2025-12-02T10:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, no more chicken, beef, or pork. Maybe I'll keep fish though.",
+        "timestamp": "2025-12-02T10:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "So more of a pescatarian approach! That's a great way to start.",
+        "timestamp": "2025-12-02T10:25:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.411826"
+    }
+  },
+  {
+    "conversation_id": "conv_0096",
+    "timestamp": "2025-12-08T22:15:07.411826",
+    "topic": "new_puppy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I adopted a puppy yesterday!",
+        "timestamp": "2025-12-08T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Aww! What kind of dog?",
+        "timestamp": "2025-12-08T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "A golden retriever mix. She's 3 months old.",
+        "timestamp": "2025-12-08T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How adorable! What did you name her?",
+        "timestamp": "2025-12-08T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Luna. She's already stolen my heart.",
+        "timestamp": "2025-12-08T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Great name! How's she adjusting to her new home?",
+        "timestamp": "2025-12-08T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Adjusting well! Though she chewed up my favorite shoe already.",
+        "timestamp": "2025-12-08T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0010",
+    "timestamp": "2025-12-09T16:15:07.411826",
+    "topic": "job_search",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm thinking about switching to a new company.",
+        "timestamp": "2025-12-09T16:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "What's prompting the change?",
+        "timestamp": "2025-12-09T16:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The startup I'm at is not doing well. Might need to look for stability.",
+        "timestamp": "2025-12-09T16:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That makes sense. Have you started interviewing?",
+        "timestamp": "2025-12-09T16:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I have an interview at Google next week.",
+        "timestamp": "2025-12-09T16:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Google! That's amazing. What team?",
+        "timestamp": "2025-12-09T16:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "YouTube backend engineering. Really excited about it.",
+        "timestamp": "2025-12-09T16:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0067",
+    "timestamp": "2025-12-10T13:15:07.411826",
+    "topic": "photography",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been really into photography lately.",
+        "timestamp": "2025-12-10T13:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Nice! What do you like to photograph?",
+        "timestamp": "2025-12-10T13:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly street photography and urban landscapes.",
+        "timestamp": "2025-12-10T13:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Do you use a DSLR or phone camera?",
+        "timestamp": "2025-12-10T13:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Just got a Sony A7 IV. It's an investment but worth it.",
+        "timestamp": "2025-12-10T13:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a serious camera! Are you thinking of doing it professionally?",
+        "timestamp": "2025-12-10T13:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Maybe someday. For now it's just a passion project.",
+        "timestamp": "2025-12-10T13:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0012",
+    "timestamp": "2025-12-11T17:15:07.411826",
+    "topic": "learning_python",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm learning Python for my work.",
+        "timestamp": "2025-12-11T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Great choice! Python is very versatile.",
+        "timestamp": "2025-12-11T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "My company is transitioning some projects to Python.",
+        "timestamp": "2025-12-11T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What were you using before?",
+        "timestamp": "2025-12-11T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly Java. But Python is better for our ML initiatives.",
+        "timestamp": "2025-12-11T17:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0083",
+    "timestamp": "2025-12-11T20:15:07.411826",
+    "topic": "antibiotics",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 10,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got prescribed antibiotics yesterday for a chest infection.",
+        "timestamp": "2025-12-11T20:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "I hope you feel better soon! How long is the course?",
+        "timestamp": "2025-12-11T20:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "10 days. Doctor said to avoid alcohol during treatment.",
+        "timestamp": "2025-12-11T20:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's standard advice. Make sure to complete the full course!",
+        "timestamp": "2025-12-11T20:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Definitely. I'm also supposed to take them with food.",
+        "timestamp": "2025-12-11T20:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0075",
+    "timestamp": "2025-12-11T22:15:07.411826",
+    "topic": "digital_nomad_bali",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been working remotely from Bali for the past month.",
+        "timestamp": "2025-12-11T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds incredible! How's the experience?",
+        "timestamp": "2025-12-11T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Amazing! Cost of living is so low here.",
+        "timestamp": "2025-12-11T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How's the wifi for work?",
+        "timestamp": "2025-12-11T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Better than I expected! I work from cafes mostly.",
+        "timestamp": "2025-12-11T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Are you planning to stay longer?",
+        "timestamp": "2025-12-11T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, at least 2 more months. Maybe longer!",
+        "timestamp": "2025-12-11T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0091",
+    "timestamp": "2025-12-12T04:15:07.411826",
+    "topic": "guitar",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just started learning guitar last month.",
+        "timestamp": "2025-12-12T04:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's awesome! Acoustic or electric?",
+        "timestamp": "2025-12-12T04:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Acoustic. I'm learning on my grandfather's old guitar.",
+        "timestamp": "2025-12-12T04:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's so special! What songs are you learning?",
+        "timestamp": "2025-12-12T04:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Starting with simple chords - G, C, D. Trying to play Wonderwall.",
+        "timestamp": "2025-12-12T04:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Classic beginner song! How often do you practice?",
+        "timestamp": "2025-12-12T04:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 30 minutes every day. Fingers are still sore though!",
+        "timestamp": "2025-12-12T04:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0082",
+    "timestamp": "2025-12-12T12:15:07.411826",
+    "topic": "protein_focus",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My nutritionist suggested I eat more protein.",
+        "timestamp": "2025-12-12T12:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That makes sense for building muscle. What protein sources are you focusing on?",
+        "timestamp": "2025-12-12T12:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly eggs and Greek yogurt for breakfast. Chicken for lunch and dinner.",
+        "timestamp": "2025-12-12T12:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Good choices! Are you tracking your protein intake?",
+        "timestamp": "2025-12-12T12:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, aiming for 150g per day. It's tough but manageable.",
+        "timestamp": "2025-12-12T12:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0018",
+    "timestamp": "2025-12-13T01:15:07.411826",
+    "topic": "new_puppy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I adopted a puppy yesterday!",
+        "timestamp": "2025-12-13T01:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Aww! What kind of dog?",
+        "timestamp": "2025-12-13T01:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "A golden retriever mix. She's 3 months old.",
+        "timestamp": "2025-12-13T01:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How adorable! What did you name her?",
+        "timestamp": "2025-12-13T01:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Luna. She's already stolen my heart.",
+        "timestamp": "2025-12-13T01:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Great name! How's she adjusting to her new home?",
+        "timestamp": "2025-12-13T01:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Adjusting well! Though she chewed up my favorite shoe already.",
+        "timestamp": "2025-12-13T01:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0015",
+    "timestamp": "2025-12-13T21:15:07.411826",
+    "topic": "photography",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been really into photography lately.",
+        "timestamp": "2025-12-13T21:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Nice! What do you like to photograph?",
+        "timestamp": "2025-12-13T21:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly street photography and urban landscapes.",
+        "timestamp": "2025-12-13T21:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Do you use a DSLR or phone camera?",
+        "timestamp": "2025-12-13T21:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Just got a Sony A7 IV. It's an investment but worth it.",
+        "timestamp": "2025-12-13T21:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a serious camera! Are you thinking of doing it professionally?",
+        "timestamp": "2025-12-13T21:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Maybe someday. For now it's just a passion project.",
+        "timestamp": "2025-12-13T21:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0048",
+    "timestamp": "2025-12-14T22:15:07.411826",
+    "topic": "barcelona_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 35,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just booked flights to Barcelona for next month!",
+        "timestamp": "2025-12-14T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Fun! Is this a vacation or work?",
+        "timestamp": "2025-12-14T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Vacation! 5 days exploring the city.",
+        "timestamp": "2025-12-14T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Have you been to Spain before?",
+        "timestamp": "2025-12-14T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, Madrid last year. But Barcelona is supposed to be different.",
+        "timestamp": "2025-12-14T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "The architecture there is incredible! Visiting any Gaudi sites?",
+        "timestamp": "2025-12-14T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely La Sagrada Familia and Park Güell!",
+        "timestamp": "2025-12-14T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0044",
+    "timestamp": "2025-12-15T03:15:07.411826",
+    "topic": "new_puppy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I adopted a puppy yesterday!",
+        "timestamp": "2025-12-15T03:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Aww! What kind of dog?",
+        "timestamp": "2025-12-15T03:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "A golden retriever mix. She's 3 months old.",
+        "timestamp": "2025-12-15T03:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How adorable! What did you name her?",
+        "timestamp": "2025-12-15T03:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Luna. She's already stolen my heart.",
+        "timestamp": "2025-12-15T03:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Great name! How's she adjusting to her new home?",
+        "timestamp": "2025-12-15T03:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Adjusting well! Though she chewed up my favorite shoe already.",
+        "timestamp": "2025-12-15T03:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0084",
+    "timestamp": "2025-12-15T14:15:07.411826",
+    "topic": "ankle_sprain",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 21,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I sprained my ankle playing soccer yesterday.",
+        "timestamp": "2025-12-15T14:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Ouch! That's painful. Have you seen a doctor?",
+        "timestamp": "2025-12-15T14:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, she said it's a grade 2 sprain. Need to rest for 2-3 weeks.",
+        "timestamp": "2025-12-15T14:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's frustrating but important for proper healing.",
+        "timestamp": "2025-12-15T14:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I know. No running or jumping until it heals completely.",
+        "timestamp": "2025-12-15T14:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0024",
+    "timestamp": "2025-12-16T01:15:07.411826",
+    "topic": "roth_ira",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just opened a Roth IRA.",
+        "timestamp": "2025-12-16T01:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Smart move! What made you decide to start?",
+        "timestamp": "2025-12-16T01:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Realized I wasn't saving enough for retirement.",
+        "timestamp": "2025-12-16T01:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What are you investing in?",
+        "timestamp": "2025-12-16T01:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly index funds. S&P 500 and total market.",
+        "timestamp": "2025-12-16T01:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Low cost and diversified! Are you maxing it out?",
+        "timestamp": "2025-12-16T01:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Trying to! That's $6,500 this year.",
+        "timestamp": "2025-12-16T01:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0064",
+    "timestamp": "2025-12-18T11:15:07.411826",
+    "topic": "learning_python",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm learning Python for my work.",
+        "timestamp": "2025-12-18T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Great choice! Python is very versatile.",
+        "timestamp": "2025-12-18T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "My company is transitioning some projects to Python.",
+        "timestamp": "2025-12-18T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What were you using before?",
+        "timestamp": "2025-12-18T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly Java. But Python is better for our ML initiatives.",
+        "timestamp": "2025-12-18T11:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0006",
+    "timestamp": "2025-12-18T22:15:07.411826",
+    "topic": "ankle_sprain",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 21,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I sprained my ankle playing soccer yesterday.",
+        "timestamp": "2025-12-18T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Ouch! That's painful. Have you seen a doctor?",
+        "timestamp": "2025-12-18T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, she said it's a grade 2 sprain. Need to rest for 2-3 weeks.",
+        "timestamp": "2025-12-18T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's frustrating but important for proper healing.",
+        "timestamp": "2025-12-18T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I know. No running or jumping until it heals completely.",
+        "timestamp": "2025-12-18T22:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.411826"
+    }
+  },
+  {
+    "conversation_id": "conv_0090",
+    "timestamp": "2025-12-20T00:15:07.411826",
+    "topic": "learning_python",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm learning Python for my work.",
+        "timestamp": "2025-12-20T00:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Great choice! Python is very versatile.",
+        "timestamp": "2025-12-20T00:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "My company is transitioning some projects to Python.",
+        "timestamp": "2025-12-20T00:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What were you using before?",
+        "timestamp": "2025-12-20T00:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly Java. But Python is better for our ML initiatives.",
+        "timestamp": "2025-12-20T00:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0071",
+    "timestamp": "2025-12-20T15:15:07.411826",
+    "topic": "parents_visiting",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 30,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My parents are visiting next month.",
+        "timestamp": "2025-12-20T15:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's nice! How long will they stay?",
+        "timestamp": "2025-12-20T15:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About 2 weeks. They live in Florida so I don't see them often.",
+        "timestamp": "2025-12-20T15:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two weeks is a good visit! Any plans?",
+        "timestamp": "2025-12-20T15:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Taking them to see the city, maybe a day trip to the mountains.",
+        "timestamp": "2025-12-20T15:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0002",
+    "timestamp": "2025-12-20T21:15:07.411826",
+    "topic": "vegan_lifestyle",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I made a delicious vegan curry last night.",
+        "timestamp": "2025-12-20T21:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds wonderful! What did you put in it?",
+        "timestamp": "2025-12-20T21:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Chickpeas, coconut milk, tomatoes, and lots of spices.",
+        "timestamp": "2025-12-20T21:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Yum! Are you eating more plant-based meals these days?",
+        "timestamp": "2025-12-20T21:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I've been fully vegan for about 2 months now.",
+        "timestamp": "2025-12-20T21:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's fantastic progress! How are you feeling?",
+        "timestamp": "2025-12-20T21:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Much more energetic honestly. I'm taking B12 supplements too.",
+        "timestamp": "2025-12-20T21:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.411826"
+    }
+  },
+  {
+    "conversation_id": "conv_0078",
+    "timestamp": "2025-12-22T10:15:07.411826",
+    "topic": "house_purchase",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just bought my first house!",
+        "timestamp": "2025-12-22T10:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge milestone!",
+        "timestamp": "2025-12-22T10:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! A 3-bedroom in the suburbs.",
+        "timestamp": "2025-12-22T10:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How's the commute to work?",
+        "timestamp": "2025-12-22T10:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "About 30 minutes. Worth it for the space.",
+        "timestamp": "2025-12-22T10:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "What was the purchase price if you don't mind me asking?",
+        "timestamp": "2025-12-22T10:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "We paid $450,000. Mortgage is about $2,800/month.",
+        "timestamp": "2025-12-22T10:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0076",
+    "timestamp": "2025-12-24T15:15:07.411826",
+    "topic": "roth_ira",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just opened a Roth IRA.",
+        "timestamp": "2025-12-24T15:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Smart move! What made you decide to start?",
+        "timestamp": "2025-12-24T15:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Realized I wasn't saving enough for retirement.",
+        "timestamp": "2025-12-24T15:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What are you investing in?",
+        "timestamp": "2025-12-24T15:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly index funds. S&P 500 and total market.",
+        "timestamp": "2025-12-24T15:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Low cost and diversified! Are you maxing it out?",
+        "timestamp": "2025-12-24T15:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Trying to! That's $6,500 this year.",
+        "timestamp": "2025-12-24T15:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0059",
+    "timestamp": "2025-12-26T13:15:07.411826",
+    "topic": "shellfish_allergy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just found out I'm allergic to shellfish.",
+        "timestamp": "2025-12-26T13:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh no! How did you discover that?",
+        "timestamp": "2025-12-26T13:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Had a reaction after eating shrimp. Had to go to urgent care.",
+        "timestamp": "2025-12-26T13:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That must have been scary! Do you have an EpiPen now?",
+        "timestamp": "2025-12-26T13:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, doctor prescribed one. I need to carry it everywhere.",
+        "timestamp": "2025-12-26T13:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's very important. Will you need to avoid all shellfish?",
+        "timestamp": "2025-12-26T13:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, crab, lobster, shrimp - all of it. Forever, apparently.",
+        "timestamp": "2025-12-26T13:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0077",
+    "timestamp": "2025-12-27T17:15:07.411826",
+    "topic": "student_loans",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm trying to pay off my student loans faster.",
+        "timestamp": "2025-12-27T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How much do you have left?",
+        "timestamp": "2025-12-27T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About $35,000. It's been hanging over me for years.",
+        "timestamp": "2025-12-27T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What's your strategy?",
+        "timestamp": "2025-12-27T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Throwing an extra $500/month at it. Should be done in 3 years.",
+        "timestamp": "2025-12-27T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's great discipline! What's the interest rate?",
+        "timestamp": "2025-12-27T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 5.5%. Not terrible but still annoying.",
+        "timestamp": "2025-12-27T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0092",
+    "timestamp": "2025-12-27T18:15:07.411826",
+    "topic": "running",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I ran my first 5K this weekend.",
+        "timestamp": "2025-12-27T18:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! How did it go?",
+        "timestamp": "2025-12-27T18:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Finished in 28 minutes. I'm super proud!",
+        "timestamp": "2025-12-27T18:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a great time for a first 5K! Will you do more races?",
+        "timestamp": "2025-12-27T18:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes! Already signed up for a 10K in 3 months.",
+        "timestamp": "2025-12-27T18:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0025",
+    "timestamp": "2025-12-28T11:15:07.411826",
+    "topic": "student_loans",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm trying to pay off my student loans faster.",
+        "timestamp": "2025-12-28T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How much do you have left?",
+        "timestamp": "2025-12-28T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About $35,000. It's been hanging over me for years.",
+        "timestamp": "2025-12-28T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What's your strategy?",
+        "timestamp": "2025-12-28T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Throwing an extra $500/month at it. Should be done in 3 years.",
+        "timestamp": "2025-12-28T11:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's great discipline! What's the interest rate?",
+        "timestamp": "2025-12-28T11:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 5.5%. Not terrible but still annoying.",
+        "timestamp": "2025-12-28T11:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0040",
+    "timestamp": "2025-12-28T20:15:07.411826",
+    "topic": "running",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I ran my first 5K this weekend.",
+        "timestamp": "2025-12-28T20:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! How did it go?",
+        "timestamp": "2025-12-28T20:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Finished in 28 minutes. I'm super proud!",
+        "timestamp": "2025-12-28T20:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a great time for a first 5K! Will you do more races?",
+        "timestamp": "2025-12-28T20:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes! Already signed up for a 10K in 3 months.",
+        "timestamp": "2025-12-28T20:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0095",
+    "timestamp": "2025-12-29T03:15:07.411826",
+    "topic": "sister_wedding",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 120,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My sister is getting married in June!",
+        "timestamp": "2025-12-29T03:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How exciting! Are you in the wedding party?",
+        "timestamp": "2025-12-29T03:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, I'm the maid of honor. Lots of planning to do.",
+        "timestamp": "2025-12-29T03:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big responsibility! Have you started planning the bachelorette?",
+        "timestamp": "2025-12-29T03:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "We're thinking Nashville for a weekend trip.",
+        "timestamp": "2025-12-29T03:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0014",
+    "timestamp": "2025-12-31T02:15:07.411826",
+    "topic": "running",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I ran my first 5K this weekend.",
+        "timestamp": "2025-12-31T02:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! How did it go?",
+        "timestamp": "2025-12-31T02:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Finished in 28 minutes. I'm super proud!",
+        "timestamp": "2025-12-31T02:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a great time for a first 5K! Will you do more races?",
+        "timestamp": "2025-12-31T02:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes! Already signed up for a 10K in 3 months.",
+        "timestamp": "2025-12-31T02:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0061",
+    "timestamp": "2025-12-31T04:15:07.411826",
+    "topic": "promotion",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got promoted to senior engineer today!",
+        "timestamp": "2025-12-31T04:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge accomplishment!",
+        "timestamp": "2025-12-31T04:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! It comes with a 20% raise too.",
+        "timestamp": "2025-12-31T04:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Well deserved! What will your new responsibilities include?",
+        "timestamp": "2025-12-31T04:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Leading a team of 5 developers and architecting new features.",
+        "timestamp": "2025-12-31T04:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's exciting! Are you looking forward to the leadership aspect?",
+        "timestamp": "2025-12-31T04:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely. I've been mentoring juniors informally anyway.",
+        "timestamp": "2025-12-31T04:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0021",
+    "timestamp": "2025-12-31T07:15:07.411826",
+    "topic": "japan_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 90,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm planning a trip to Japan next spring.",
+        "timestamp": "2025-12-31T07:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Japan in spring! Cherry blossoms?",
+        "timestamp": "2025-12-31T07:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Exactly! Planning for late March, 2 weeks.",
+        "timestamp": "2025-12-31T07:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Which cities will you visit?",
+        "timestamp": "2025-12-31T07:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Tokyo, Kyoto, Osaka, and maybe Hiroshima.",
+        "timestamp": "2025-12-31T07:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Sounds amazing! Have you been to Japan before?",
+        "timestamp": "2025-12-31T07:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "No, it's my first time. So excited to try authentic ramen!",
+        "timestamp": "2025-12-31T07:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0038",
+    "timestamp": "2026-01-01T18:15:07.411826",
+    "topic": "learning_python",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm learning Python for my work.",
+        "timestamp": "2026-01-01T18:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Great choice! Python is very versatile.",
+        "timestamp": "2026-01-01T18:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "My company is transitioning some projects to Python.",
+        "timestamp": "2026-01-01T18:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What were you using before?",
+        "timestamp": "2026-01-01T18:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly Java. But Python is better for our ML initiatives.",
+        "timestamp": "2026-01-01T18:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0023",
+    "timestamp": "2026-01-02T12:15:07.411826",
+    "topic": "digital_nomad_bali",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been working remotely from Bali for the past month.",
+        "timestamp": "2026-01-02T12:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds incredible! How's the experience?",
+        "timestamp": "2026-01-02T12:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Amazing! Cost of living is so low here.",
+        "timestamp": "2026-01-02T12:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How's the wifi for work?",
+        "timestamp": "2026-01-02T12:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Better than I expected! I work from cafes mostly.",
+        "timestamp": "2026-01-02T12:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Are you planning to stay longer?",
+        "timestamp": "2026-01-02T12:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, at least 2 more months. Maybe longer!",
+        "timestamp": "2026-01-02T12:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0093",
+    "timestamp": "2026-01-03T04:15:07.411826",
+    "topic": "photography",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been really into photography lately.",
+        "timestamp": "2026-01-03T04:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Nice! What do you like to photograph?",
+        "timestamp": "2026-01-03T04:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly street photography and urban landscapes.",
+        "timestamp": "2026-01-03T04:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Do you use a DSLR or phone camera?",
+        "timestamp": "2026-01-03T04:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Just got a Sony A7 IV. It's an investment but worth it.",
+        "timestamp": "2026-01-03T04:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a serious camera! Are you thinking of doing it professionally?",
+        "timestamp": "2026-01-03T04:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Maybe someday. For now it's just a passion project.",
+        "timestamp": "2026-01-03T04:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0055",
+    "timestamp": "2026-01-03T15:15:07.411826",
+    "topic": "meat_eating",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I had the most amazing steak last night at this new restaurant.",
+        "timestamp": "2026-01-03T15:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh nice! Where did you go?",
+        "timestamp": "2026-01-03T15:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "It's called The Grill House downtown. Best ribeye I've ever had.",
+        "timestamp": "2026-01-03T15:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Sounds delicious! Do you eat steak often?",
+        "timestamp": "2026-01-03T15:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Maybe once a week. I love a good quality cut of beef.",
+        "timestamp": "2026-01-03T15:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0060",
+    "timestamp": "2026-01-05T02:15:07.411826",
+    "topic": "juice_cleanse",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 5,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Starting a 5-day juice cleanse tomorrow.",
+        "timestamp": "2026-01-05T02:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a commitment! What made you decide to do it?",
+        "timestamp": "2026-01-05T02:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Want to reset after the holidays. No solid food for 5 days.",
+        "timestamp": "2026-01-05T02:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Make sure you're getting enough calories from the juices!",
+        "timestamp": "2026-01-05T02:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I have a plan - green juices, fruit juices, and some vegetable broth.",
+        "timestamp": "2026-01-05T02:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0066",
+    "timestamp": "2026-01-05T14:15:07.411826",
+    "topic": "running",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I ran my first 5K this weekend.",
+        "timestamp": "2026-01-05T14:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! How did it go?",
+        "timestamp": "2026-01-05T14:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Finished in 28 minutes. I'm super proud!",
+        "timestamp": "2026-01-05T14:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a great time for a first 5K! Will you do more races?",
+        "timestamp": "2026-01-05T14:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes! Already signed up for a 10K in 3 months.",
+        "timestamp": "2026-01-05T14:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0068",
+    "timestamp": "2026-01-05T18:15:07.411826",
+    "topic": "marathon_training",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm training for a marathon next year.",
+        "timestamp": "2026-01-05T18:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Wow! That's a big goal. Which marathon?",
+        "timestamp": "2026-01-05T18:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The Chicago Marathon in October.",
+        "timestamp": "2026-01-05T18:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Great choice! What's your training plan?",
+        "timestamp": "2026-01-05T18:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Running 50 miles a week, gradually increasing to 70.",
+        "timestamp": "2026-01-05T18:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's serious mileage! What's your goal time?",
+        "timestamp": "2026-01-05T18:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Hoping to finish under 4 hours. We'll see!",
+        "timestamp": "2026-01-05T18:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0049",
+    "timestamp": "2026-01-05T21:15:07.411826",
+    "topic": "digital_nomad_bali",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been working remotely from Bali for the past month.",
+        "timestamp": "2026-01-05T21:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds incredible! How's the experience?",
+        "timestamp": "2026-01-05T21:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Amazing! Cost of living is so low here.",
+        "timestamp": "2026-01-05T21:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How's the wifi for work?",
+        "timestamp": "2026-01-05T21:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Better than I expected! I work from cafes mostly.",
+        "timestamp": "2026-01-05T21:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Are you planning to stay longer?",
+        "timestamp": "2026-01-05T21:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, at least 2 more months. Maybe longer!",
+        "timestamp": "2026-01-05T21:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0080",
+    "timestamp": "2026-01-06T22:15:07.411826",
+    "topic": "vegan_lifestyle",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I made a delicious vegan curry last night.",
+        "timestamp": "2026-01-06T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds wonderful! What did you put in it?",
+        "timestamp": "2026-01-06T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Chickpeas, coconut milk, tomatoes, and lots of spices.",
+        "timestamp": "2026-01-06T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Yum! Are you eating more plant-based meals these days?",
+        "timestamp": "2026-01-06T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I've been fully vegan for about 2 months now.",
+        "timestamp": "2026-01-06T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's fantastic progress! How are you feeling?",
+        "timestamp": "2026-01-06T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Much more energetic honestly. I'm taking B12 supplements too.",
+        "timestamp": "2026-01-06T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0041",
+    "timestamp": "2026-01-08T02:15:07.411826",
+    "topic": "photography",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been really into photography lately.",
+        "timestamp": "2026-01-08T02:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Nice! What do you like to photograph?",
+        "timestamp": "2026-01-08T02:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly street photography and urban landscapes.",
+        "timestamp": "2026-01-08T02:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Do you use a DSLR or phone camera?",
+        "timestamp": "2026-01-08T02:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Just got a Sony A7 IV. It's an investment but worth it.",
+        "timestamp": "2026-01-08T02:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a serious camera! Are you thinking of doing it professionally?",
+        "timestamp": "2026-01-08T02:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Maybe someday. For now it's just a passion project.",
+        "timestamp": "2026-01-08T02:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0086",
+    "timestamp": "2026-01-09T06:15:07.411826",
+    "topic": "juice_cleanse",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 5,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Starting a 5-day juice cleanse tomorrow.",
+        "timestamp": "2026-01-09T06:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a commitment! What made you decide to do it?",
+        "timestamp": "2026-01-09T06:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Want to reset after the holidays. No solid food for 5 days.",
+        "timestamp": "2026-01-09T06:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Make sure you're getting enough calories from the juices!",
+        "timestamp": "2026-01-09T06:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I have a plan - green juices, fruit juices, and some vegetable broth.",
+        "timestamp": "2026-01-09T06:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0063",
+    "timestamp": "2026-01-09T18:15:07.411826",
+    "topic": "new_job",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I accepted the offer from Meta!",
+        "timestamp": "2026-01-09T18:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! When do you start?",
+        "timestamp": "2026-01-09T18:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "In 3 weeks. I'm relocating to Menlo Park.",
+        "timestamp": "2026-01-09T18:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big move! Are you excited?",
+        "timestamp": "2026-01-09T18:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Very! My salary will be $180,000 plus stock options.",
+        "timestamp": "2026-01-09T18:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a great package! Will you be working on Instagram or Facebook?",
+        "timestamp": "2026-01-09T18:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Instagram Reels team. Really cutting-edge stuff.",
+        "timestamp": "2026-01-09T18:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0037",
+    "timestamp": "2026-01-11T11:15:07.411826",
+    "topic": "new_job",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I accepted the offer from Meta!",
+        "timestamp": "2026-01-11T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! When do you start?",
+        "timestamp": "2026-01-11T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "In 3 weeks. I'm relocating to Menlo Park.",
+        "timestamp": "2026-01-11T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big move! Are you excited?",
+        "timestamp": "2026-01-11T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Very! My salary will be $180,000 plus stock options.",
+        "timestamp": "2026-01-11T11:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a great package! Will you be working on Instagram or Facebook?",
+        "timestamp": "2026-01-11T11:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Instagram Reels team. Really cutting-edge stuff.",
+        "timestamp": "2026-01-11T11:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0072",
+    "timestamp": "2026-01-11T14:15:07.411826",
+    "topic": "moving_in_together",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm moving in with my partner next month.",
+        "timestamp": "2026-01-11T14:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a big step! Are you excited?",
+        "timestamp": "2026-01-11T14:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Very! We found a great apartment with two bedrooms.",
+        "timestamp": "2026-01-11T14:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two bedrooms - is one for an office?",
+        "timestamp": "2026-01-11T14:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, we both work from home sometimes. Plus rent is $2,400.",
+        "timestamp": "2026-01-11T14:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's reasonable! What area?",
+        "timestamp": "2026-01-11T14:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Downtown, walking distance to everything.",
+        "timestamp": "2026-01-11T14:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0050",
+    "timestamp": "2026-01-13T01:15:07.411826",
+    "topic": "roth_ira",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just opened a Roth IRA.",
+        "timestamp": "2026-01-13T01:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Smart move! What made you decide to start?",
+        "timestamp": "2026-01-13T01:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Realized I wasn't saving enough for retirement.",
+        "timestamp": "2026-01-13T01:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What are you investing in?",
+        "timestamp": "2026-01-13T01:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Mostly index funds. S&P 500 and total market.",
+        "timestamp": "2026-01-13T01:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Low cost and diversified! Are you maxing it out?",
+        "timestamp": "2026-01-13T01:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Trying to! That's $6,500 this year.",
+        "timestamp": "2026-01-13T01:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0062",
+    "timestamp": "2026-01-13T07:15:07.411826",
+    "topic": "job_search",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm thinking about switching to a new company.",
+        "timestamp": "2026-01-13T07:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "What's prompting the change?",
+        "timestamp": "2026-01-13T07:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The startup I'm at is not doing well. Might need to look for stability.",
+        "timestamp": "2026-01-13T07:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That makes sense. Have you started interviewing?",
+        "timestamp": "2026-01-13T07:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I have an interview at Google next week.",
+        "timestamp": "2026-01-13T07:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Google! That's amazing. What team?",
+        "timestamp": "2026-01-13T07:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "YouTube backend engineering. Really excited about it.",
+        "timestamp": "2026-01-13T07:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0032",
+    "timestamp": "2026-01-14T17:15:07.411826",
+    "topic": "ankle_sprain",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 21,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I sprained my ankle playing soccer yesterday.",
+        "timestamp": "2026-01-14T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Ouch! That's painful. Have you seen a doctor?",
+        "timestamp": "2026-01-14T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, she said it's a grade 2 sprain. Need to rest for 2-3 weeks.",
+        "timestamp": "2026-01-14T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's frustrating but important for proper healing.",
+        "timestamp": "2026-01-14T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I know. No running or jumping until it heals completely.",
+        "timestamp": "2026-01-14T17:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0034",
+    "timestamp": "2026-01-15T00:15:07.411826",
+    "topic": "juice_cleanse",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 5,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Starting a 5-day juice cleanse tomorrow.",
+        "timestamp": "2026-01-15T00:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a commitment! What made you decide to do it?",
+        "timestamp": "2026-01-15T00:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Want to reset after the holidays. No solid food for 5 days.",
+        "timestamp": "2026-01-15T00:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Make sure you're getting enough calories from the juices!",
+        "timestamp": "2026-01-15T00:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I have a plan - green juices, fruit juices, and some vegetable broth.",
+        "timestamp": "2026-01-15T00:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0030",
+    "timestamp": "2026-01-15T10:15:07.411826",
+    "topic": "protein_focus",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My nutritionist suggested I eat more protein.",
+        "timestamp": "2026-01-15T10:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That makes sense for building muscle. What protein sources are you focusing on?",
+        "timestamp": "2026-01-15T10:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly eggs and Greek yogurt for breakfast. Chicken for lunch and dinner.",
+        "timestamp": "2026-01-15T10:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Good choices! Are you tracking your protein intake?",
+        "timestamp": "2026-01-15T10:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, aiming for 150g per day. It's tough but manageable.",
+        "timestamp": "2026-01-15T10:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0088",
+    "timestamp": "2026-01-16T17:15:07.411826",
+    "topic": "job_search",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm thinking about switching to a new company.",
+        "timestamp": "2026-01-16T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "What's prompting the change?",
+        "timestamp": "2026-01-16T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The startup I'm at is not doing well. Might need to look for stability.",
+        "timestamp": "2026-01-16T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That makes sense. Have you started interviewing?",
+        "timestamp": "2026-01-16T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I have an interview at Google next week.",
+        "timestamp": "2026-01-16T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Google! That's amazing. What team?",
+        "timestamp": "2026-01-16T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "YouTube backend engineering. Really excited about it.",
+        "timestamp": "2026-01-16T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0046",
+    "timestamp": "2026-01-16T21:15:07.411826",
+    "topic": "moving_in_together",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm moving in with my partner next month.",
+        "timestamp": "2026-01-16T21:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a big step! Are you excited?",
+        "timestamp": "2026-01-16T21:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Very! We found a great apartment with two bedrooms.",
+        "timestamp": "2026-01-16T21:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two bedrooms - is one for an office?",
+        "timestamp": "2026-01-16T21:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, we both work from home sometimes. Plus rent is $2,400.",
+        "timestamp": "2026-01-16T21:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's reasonable! What area?",
+        "timestamp": "2026-01-16T21:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Downtown, walking distance to everything.",
+        "timestamp": "2026-01-16T21:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0043",
+    "timestamp": "2026-01-16T22:15:07.411826",
+    "topic": "sister_wedding",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 120,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My sister is getting married in June!",
+        "timestamp": "2026-01-16T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How exciting! Are you in the wedding party?",
+        "timestamp": "2026-01-16T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, I'm the maid of honor. Lots of planning to do.",
+        "timestamp": "2026-01-16T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big responsibility! Have you started planning the bachelorette?",
+        "timestamp": "2026-01-16T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "We're thinking Nashville for a weekend trip.",
+        "timestamp": "2026-01-16T22:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0057",
+    "timestamp": "2026-01-18T11:15:07.411826",
+    "topic": "antibiotics",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 10,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got prescribed antibiotics yesterday for a chest infection.",
+        "timestamp": "2026-01-18T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "I hope you feel better soon! How long is the course?",
+        "timestamp": "2026-01-18T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "10 days. Doctor said to avoid alcohol during treatment.",
+        "timestamp": "2026-01-18T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's standard advice. Make sure to complete the full course!",
+        "timestamp": "2026-01-18T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Definitely. I'm also supposed to take them with food.",
+        "timestamp": "2026-01-18T11:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0052",
+    "timestamp": "2026-01-18T16:15:07.411826",
+    "topic": "house_purchase",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just bought my first house!",
+        "timestamp": "2026-01-18T16:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge milestone!",
+        "timestamp": "2026-01-18T16:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! A 3-bedroom in the suburbs.",
+        "timestamp": "2026-01-18T16:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "How's the commute to work?",
+        "timestamp": "2026-01-18T16:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "About 30 minutes. Worth it for the space.",
+        "timestamp": "2026-01-18T16:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "What was the purchase price if you don't mind me asking?",
+        "timestamp": "2026-01-18T16:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "We paid $450,000. Mortgage is about $2,800/month.",
+        "timestamp": "2026-01-18T16:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0065",
+    "timestamp": "2026-01-19T17:15:07.411826",
+    "topic": "guitar",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just started learning guitar last month.",
+        "timestamp": "2026-01-19T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's awesome! Acoustic or electric?",
+        "timestamp": "2026-01-19T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Acoustic. I'm learning on my grandfather's old guitar.",
+        "timestamp": "2026-01-19T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's so special! What songs are you learning?",
+        "timestamp": "2026-01-19T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Starting with simple chords - G, C, D. Trying to play Wonderwall.",
+        "timestamp": "2026-01-19T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Classic beginner song! How often do you practice?",
+        "timestamp": "2026-01-19T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 30 minutes every day. Fingers are still sore though!",
+        "timestamp": "2026-01-19T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0100",
+    "timestamp": "2026-01-22T06:15:07.411826",
+    "topic": "barcelona_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 35,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just booked flights to Barcelona for next month!",
+        "timestamp": "2026-01-22T06:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Fun! Is this a vacation or work?",
+        "timestamp": "2026-01-22T06:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Vacation! 5 days exploring the city.",
+        "timestamp": "2026-01-22T06:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Have you been to Spain before?",
+        "timestamp": "2026-01-22T06:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, Madrid last year. But Barcelona is supposed to be different.",
+        "timestamp": "2026-01-22T06:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "The architecture there is incredible! Visiting any Gaudi sites?",
+        "timestamp": "2026-01-22T06:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely La Sagrada Familia and Park Güell!",
+        "timestamp": "2026-01-22T06:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0089",
+    "timestamp": "2026-01-22T22:15:07.411826",
+    "topic": "new_job",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I accepted the offer from Meta!",
+        "timestamp": "2026-01-22T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! When do you start?",
+        "timestamp": "2026-01-22T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "In 3 weeks. I'm relocating to Menlo Park.",
+        "timestamp": "2026-01-22T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big move! Are you excited?",
+        "timestamp": "2026-01-22T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Very! My salary will be $180,000 plus stock options.",
+        "timestamp": "2026-01-22T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's a great package! Will you be working on Instagram or Facebook?",
+        "timestamp": "2026-01-22T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Instagram Reels team. Really cutting-edge stuff.",
+        "timestamp": "2026-01-22T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0027",
+    "timestamp": "2026-01-23T18:15:07.411826",
+    "topic": "diet_change",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been thinking about changing my diet lately.",
+        "timestamp": "2026-01-23T18:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's great! What kind of changes are you considering?",
+        "timestamp": "2026-01-23T18:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "I want to try going vegetarian. I've heard it's healthier.",
+        "timestamp": "2026-01-23T18:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Vegetarian diets can be very nutritious! Are you planning to cut out all meat?",
+        "timestamp": "2026-01-23T18:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, no more chicken, beef, or pork. Maybe I'll keep fish though.",
+        "timestamp": "2026-01-23T18:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "So more of a pescatarian approach! That's a great way to start.",
+        "timestamp": "2026-01-23T18:25:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0016",
+    "timestamp": "2026-01-24T07:15:07.411826",
+    "topic": "marathon_training",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm training for a marathon next year.",
+        "timestamp": "2026-01-24T07:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Wow! That's a big goal. Which marathon?",
+        "timestamp": "2026-01-24T07:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The Chicago Marathon in October.",
+        "timestamp": "2026-01-24T07:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Great choice! What's your training plan?",
+        "timestamp": "2026-01-24T07:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Running 50 miles a week, gradually increasing to 70.",
+        "timestamp": "2026-01-24T07:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's serious mileage! What's your goal time?",
+        "timestamp": "2026-01-24T07:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Hoping to finish under 4 hours. We'll see!",
+        "timestamp": "2026-01-24T07:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0054",
+    "timestamp": "2026-01-24T13:15:07.411826",
+    "topic": "vegan_lifestyle",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I made a delicious vegan curry last night.",
+        "timestamp": "2026-01-24T13:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That sounds wonderful! What did you put in it?",
+        "timestamp": "2026-01-24T13:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Chickpeas, coconut milk, tomatoes, and lots of spices.",
+        "timestamp": "2026-01-24T13:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Yum! Are you eating more plant-based meals these days?",
+        "timestamp": "2026-01-24T13:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, I've been fully vegan for about 2 months now.",
+        "timestamp": "2026-01-24T13:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's fantastic progress! How are you feeling?",
+        "timestamp": "2026-01-24T13:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Much more energetic honestly. I'm taking B12 supplements too.",
+        "timestamp": "2026-01-24T13:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0051",
+    "timestamp": "2026-01-24T22:15:07.411826",
+    "topic": "student_loans",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm trying to pay off my student loans faster.",
+        "timestamp": "2026-01-24T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How much do you have left?",
+        "timestamp": "2026-01-24T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About $35,000. It's been hanging over me for years.",
+        "timestamp": "2026-01-24T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "What's your strategy?",
+        "timestamp": "2026-01-24T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Throwing an extra $500/month at it. Should be done in 3 years.",
+        "timestamp": "2026-01-24T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's great discipline! What's the interest rate?",
+        "timestamp": "2026-01-24T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 5.5%. Not terrible but still annoying.",
+        "timestamp": "2026-01-24T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "finance",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0039",
+    "timestamp": "2026-01-25T17:15:07.411826",
+    "topic": "guitar",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just started learning guitar last month.",
+        "timestamp": "2026-01-25T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's awesome! Acoustic or electric?",
+        "timestamp": "2026-01-25T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Acoustic. I'm learning on my grandfather's old guitar.",
+        "timestamp": "2026-01-25T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's so special! What songs are you learning?",
+        "timestamp": "2026-01-25T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Starting with simple chords - G, C, D. Trying to play Wonderwall.",
+        "timestamp": "2026-01-25T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Classic beginner song! How often do you practice?",
+        "timestamp": "2026-01-25T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 30 minutes every day. Fingers are still sore though!",
+        "timestamp": "2026-01-25T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0029",
+    "timestamp": "2026-01-25T20:15:07.411826",
+    "topic": "meat_eating",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I had the most amazing steak last night at this new restaurant.",
+        "timestamp": "2026-01-25T20:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh nice! Where did you go?",
+        "timestamp": "2026-01-25T20:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "It's called The Grill House downtown. Best ribeye I've ever had.",
+        "timestamp": "2026-01-25T20:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Sounds delicious! Do you eat steak often?",
+        "timestamp": "2026-01-25T20:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Maybe once a week. I love a good quality cut of beef.",
+        "timestamp": "2026-01-25T20:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0058",
+    "timestamp": "2026-01-26T11:15:07.411826",
+    "topic": "ankle_sprain",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 21,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I sprained my ankle playing soccer yesterday.",
+        "timestamp": "2026-01-26T11:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Ouch! That's painful. Have you seen a doctor?",
+        "timestamp": "2026-01-26T11:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, she said it's a grade 2 sprain. Need to rest for 2-3 weeks.",
+        "timestamp": "2026-01-26T11:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's frustrating but important for proper healing.",
+        "timestamp": "2026-01-26T11:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "I know. No running or jumping until it heals completely.",
+        "timestamp": "2026-01-26T11:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0009",
+    "timestamp": "2026-01-27T17:15:07.411826",
+    "topic": "promotion",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got promoted to senior engineer today!",
+        "timestamp": "2026-01-27T17:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Congratulations! That's a huge accomplishment!",
+        "timestamp": "2026-01-27T17:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Thanks! It comes with a 20% raise too.",
+        "timestamp": "2026-01-27T17:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Well deserved! What will your new responsibilities include?",
+        "timestamp": "2026-01-27T17:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Leading a team of 5 developers and architecting new features.",
+        "timestamp": "2026-01-27T17:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's exciting! Are you looking forward to the leadership aspect?",
+        "timestamp": "2026-01-27T17:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely. I've been mentoring juniors informally anyway.",
+        "timestamp": "2026-01-27T17:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "career",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0005",
+    "timestamp": "2026-01-28T18:15:07.411826",
+    "topic": "antibiotics",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 10,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I got prescribed antibiotics yesterday for a chest infection.",
+        "timestamp": "2026-01-28T18:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "I hope you feel better soon! How long is the course?",
+        "timestamp": "2026-01-28T18:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "10 days. Doctor said to avoid alcohol during treatment.",
+        "timestamp": "2026-01-28T18:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's standard advice. Make sure to complete the full course!",
+        "timestamp": "2026-01-28T18:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Definitely. I'm also supposed to take them with food.",
+        "timestamp": "2026-01-28T18:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.411826"
+    }
+  },
+  {
+    "conversation_id": "conv_0047",
+    "timestamp": "2026-01-29T16:15:07.411826",
+    "topic": "japan_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 90,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm planning a trip to Japan next spring.",
+        "timestamp": "2026-01-29T16:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Japan in spring! Cherry blossoms?",
+        "timestamp": "2026-01-29T16:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Exactly! Planning for late March, 2 weeks.",
+        "timestamp": "2026-01-29T16:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Which cities will you visit?",
+        "timestamp": "2026-01-29T16:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Tokyo, Kyoto, Osaka, and maybe Hiroshima.",
+        "timestamp": "2026-01-29T16:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Sounds amazing! Have you been to Japan before?",
+        "timestamp": "2026-01-29T16:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "No, it's my first time. So excited to try authentic ramen!",
+        "timestamp": "2026-01-29T16:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0013",
+    "timestamp": "2026-01-30T00:15:07.411826",
+    "topic": "guitar",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just started learning guitar last month.",
+        "timestamp": "2026-01-30T00:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's awesome! Acoustic or electric?",
+        "timestamp": "2026-01-30T00:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Acoustic. I'm learning on my grandfather's old guitar.",
+        "timestamp": "2026-01-30T00:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's so special! What songs are you learning?",
+        "timestamp": "2026-01-30T00:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Starting with simple chords - G, C, D. Trying to play Wonderwall.",
+        "timestamp": "2026-01-30T00:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Classic beginner song! How often do you practice?",
+        "timestamp": "2026-01-30T00:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "About 30 minutes every day. Fingers are still sore though!",
+        "timestamp": "2026-01-30T00:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0074",
+    "timestamp": "2026-01-30T15:15:07.411826",
+    "topic": "barcelona_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 35,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just booked flights to Barcelona for next month!",
+        "timestamp": "2026-01-30T15:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Fun! Is this a vacation or work?",
+        "timestamp": "2026-01-30T15:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Vacation! 5 days exploring the city.",
+        "timestamp": "2026-01-30T15:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Have you been to Spain before?",
+        "timestamp": "2026-01-30T15:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, Madrid last year. But Barcelona is supposed to be different.",
+        "timestamp": "2026-01-30T15:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "The architecture there is incredible! Visiting any Gaudi sites?",
+        "timestamp": "2026-01-30T15:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely La Sagrada Familia and Park Güell!",
+        "timestamp": "2026-01-30T15:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0045",
+    "timestamp": "2026-01-31T05:15:07.411826",
+    "topic": "parents_visiting",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 30,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My parents are visiting next month.",
+        "timestamp": "2026-01-31T05:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's nice! How long will they stay?",
+        "timestamp": "2026-01-31T05:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About 2 weeks. They live in Florida so I don't see them often.",
+        "timestamp": "2026-01-31T05:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two weeks is a good visit! Any plans?",
+        "timestamp": "2026-01-31T05:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Taking them to see the city, maybe a day trip to the mountains.",
+        "timestamp": "2026-01-31T05:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0094",
+    "timestamp": "2026-01-31T23:15:07.411826",
+    "topic": "marathon_training",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm training for a marathon next year.",
+        "timestamp": "2026-01-31T23:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Wow! That's a big goal. Which marathon?",
+        "timestamp": "2026-01-31T23:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "The Chicago Marathon in October.",
+        "timestamp": "2026-01-31T23:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Great choice! What's your training plan?",
+        "timestamp": "2026-01-31T23:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Running 50 miles a week, gradually increasing to 70.",
+        "timestamp": "2026-01-31T23:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's serious mileage! What's your goal time?",
+        "timestamp": "2026-01-31T23:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Hoping to finish under 4 hours. We'll see!",
+        "timestamp": "2026-01-31T23:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "hobbies",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0022",
+    "timestamp": "2026-02-02T02:15:07.411826",
+    "topic": "barcelona_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 35,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "Just booked flights to Barcelona for next month!",
+        "timestamp": "2026-02-02T02:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Fun! Is this a vacation or work?",
+        "timestamp": "2026-02-02T02:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Vacation! 5 days exploring the city.",
+        "timestamp": "2026-02-02T02:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Have you been to Spain before?",
+        "timestamp": "2026-02-02T02:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, Madrid last year. But Barcelona is supposed to be different.",
+        "timestamp": "2026-02-02T02:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "The architecture there is incredible! Visiting any Gaudi sites?",
+        "timestamp": "2026-02-02T02:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Definitely La Sagrada Familia and Park Güell!",
+        "timestamp": "2026-02-02T02:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0017",
+    "timestamp": "2026-02-02T05:15:07.411826",
+    "topic": "sister_wedding",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 120,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My sister is getting married in June!",
+        "timestamp": "2026-02-02T05:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "How exciting! Are you in the wedding party?",
+        "timestamp": "2026-02-02T05:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Yes, I'm the maid of honor. Lots of planning to do.",
+        "timestamp": "2026-02-02T05:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That's a big responsibility! Have you started planning the bachelorette?",
+        "timestamp": "2026-02-02T05:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "We're thinking Nashville for a weekend trip.",
+        "timestamp": "2026-02-02T05:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0079",
+    "timestamp": "2026-02-03T00:15:07.411826",
+    "topic": "diet_change",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I've been thinking about changing my diet lately.",
+        "timestamp": "2026-02-03T00:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's great! What kind of changes are you considering?",
+        "timestamp": "2026-02-03T00:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "I want to try going vegetarian. I've heard it's healthier.",
+        "timestamp": "2026-02-03T00:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Vegetarian diets can be very nutritious! Are you planning to cut out all meat?",
+        "timestamp": "2026-02-03T00:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, no more chicken, beef, or pork. Maybe I'll keep fish though.",
+        "timestamp": "2026-02-03T00:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "So more of a pescatarian approach! That's a great way to start.",
+        "timestamp": "2026-02-03T00:25:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0020",
+    "timestamp": "2026-02-04T22:15:07.411826",
+    "topic": "moving_in_together",
+    "has_conflict_potential": true,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm moving in with my partner next month.",
+        "timestamp": "2026-02-04T22:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's a big step! Are you excited?",
+        "timestamp": "2026-02-04T22:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Very! We found a great apartment with two bedrooms.",
+        "timestamp": "2026-02-04T22:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two bedrooms - is one for an office?",
+        "timestamp": "2026-02-04T22:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, we both work from home sometimes. Plus rent is $2,400.",
+        "timestamp": "2026-02-04T22:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's reasonable! What area?",
+        "timestamp": "2026-02-04T22:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Downtown, walking distance to everything.",
+        "timestamp": "2026-02-04T22:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0056",
+    "timestamp": "2026-02-08T02:15:07.411826",
+    "topic": "protein_focus",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My nutritionist suggested I eat more protein.",
+        "timestamp": "2026-02-08T02:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That makes sense for building muscle. What protein sources are you focusing on?",
+        "timestamp": "2026-02-08T02:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly eggs and Greek yogurt for breakfast. Chicken for lunch and dinner.",
+        "timestamp": "2026-02-08T02:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Good choices! Are you tracking your protein intake?",
+        "timestamp": "2026-02-08T02:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, aiming for 150g per day. It's tough but manageable.",
+        "timestamp": "2026-02-08T02:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.412829"
+    }
+  },
+  {
+    "conversation_id": "conv_0099",
+    "timestamp": "2026-02-08T02:15:07.411826",
+    "topic": "japan_trip",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 90,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I'm planning a trip to Japan next spring.",
+        "timestamp": "2026-02-08T02:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Japan in spring! Cherry blossoms?",
+        "timestamp": "2026-02-08T02:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Exactly! Planning for late March, 2 weeks.",
+        "timestamp": "2026-02-08T02:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Which cities will you visit?",
+        "timestamp": "2026-02-08T02:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Tokyo, Kyoto, Osaka, and maybe Hiroshima.",
+        "timestamp": "2026-02-08T02:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "Sounds amazing! Have you been to Japan before?",
+        "timestamp": "2026-02-08T02:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "No, it's my first time. So excited to try authentic ramen!",
+        "timestamp": "2026-02-08T02:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "travel",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0085",
+    "timestamp": "2026-02-08T16:15:07.411826",
+    "topic": "shellfish_allergy",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "I just found out I'm allergic to shellfish.",
+        "timestamp": "2026-02-08T16:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "Oh no! How did you discover that?",
+        "timestamp": "2026-02-08T16:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Had a reaction after eating shrimp. Had to go to urgent care.",
+        "timestamp": "2026-02-08T16:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "That must have been scary! Do you have an EpiPen now?",
+        "timestamp": "2026-02-08T16:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, doctor prescribed one. I need to carry it everywhere.",
+        "timestamp": "2026-02-08T16:23:07.411826"
+      },
+      {
+        "turn_id": 6,
+        "speaker": "assistant",
+        "content": "That's very important. Will you need to avoid all shellfish?",
+        "timestamp": "2026-02-08T16:25:07.411826"
+      },
+      {
+        "turn_id": 7,
+        "speaker": "user",
+        "content": "Yes, crab, lobster, shrimp - all of it. Forever, apparently.",
+        "timestamp": "2026-02-08T16:27:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "health",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0097",
+    "timestamp": "2026-02-09T13:15:07.411826",
+    "topic": "parents_visiting",
+    "has_conflict_potential": false,
+    "has_foresight": true,
+    "foresight_days": 30,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My parents are visiting next month.",
+        "timestamp": "2026-02-09T13:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That's nice! How long will they stay?",
+        "timestamp": "2026-02-09T13:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "About 2 weeks. They live in Florida so I don't see them often.",
+        "timestamp": "2026-02-09T13:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Two weeks is a good visit! Any plans?",
+        "timestamp": "2026-02-09T13:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Taking them to see the city, maybe a day trip to the mountains.",
+        "timestamp": "2026-02-09T13:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "relationships",
+      "generated_at": "2026-02-08T20:15:07.413824"
+    }
+  },
+  {
+    "conversation_id": "conv_0004",
+    "timestamp": "2026-02-09T15:15:07.411826",
+    "topic": "protein_focus",
+    "has_conflict_potential": false,
+    "has_foresight": false,
+    "foresight_days": null,
+    "turns": [
+      {
+        "turn_id": 1,
+        "speaker": "user",
+        "content": "My nutritionist suggested I eat more protein.",
+        "timestamp": "2026-02-09T15:15:07.411826"
+      },
+      {
+        "turn_id": 2,
+        "speaker": "assistant",
+        "content": "That makes sense for building muscle. What protein sources are you focusing on?",
+        "timestamp": "2026-02-09T15:17:07.411826"
+      },
+      {
+        "turn_id": 3,
+        "speaker": "user",
+        "content": "Mostly eggs and Greek yogurt for breakfast. Chicken for lunch and dinner.",
+        "timestamp": "2026-02-09T15:19:07.411826"
+      },
+      {
+        "turn_id": 4,
+        "speaker": "assistant",
+        "content": "Good choices! Are you tracking your protein intake?",
+        "timestamp": "2026-02-09T15:21:07.411826"
+      },
+      {
+        "turn_id": 5,
+        "speaker": "user",
+        "content": "Yes, aiming for 150g per day. It's tough but manageable.",
+        "timestamp": "2026-02-09T15:23:07.411826"
+      }
+    ],
+    "metadata": {
+      "category": "diet",
+      "generated_at": "2026-02-08T20:15:07.411826"
+    }
+  }
+]

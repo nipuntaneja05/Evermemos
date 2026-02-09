@@ -30,18 +30,19 @@ class Config:
     EMBEDDING_DIMENSION: int = 1536
     
     # LLM Configuration
-    LLM_PROVIDER: str = "ollama"  # "ollama" (local), "groq", or "gemini"
+    LLM_PROVIDER: str = "groq"  # "ollama" (local), "groq", or "gemini"
     
     # Ollama Configuration (LOCAL - no rate limits!)
     OLLAMA_MODEL: str = "qwen2.5:7b"  # Local model you downloaded
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     
     # Groq Configuration (fallback)
-    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    GROQ_MODEL: str = "llama-3.3-70b-versatile"  # High quality model
     GEMINI_MODEL: str = "models/gemini-2.5-flash"
     
     # Optimization: Skip boundary detection for short conversations
-    SKIP_BOUNDARY_DETECTION_THRESHOLD: int = 3  # Treat as 1 episode if <= 3 turns
+    # Set to 0 to always use LLM (local Ollama has no rate limits)
+    SKIP_BOUNDARY_DETECTION_THRESHOLD: int = 0  # Always use LLM for accuracy
     
     # Semantic Boundary Detection
     SLIDING_WINDOW_SIZE: int = 5  # Number of turns to analyze
