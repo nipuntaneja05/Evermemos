@@ -57,7 +57,7 @@ class Foresight:
 class Metadata:
     """
     Contextual grounding for MemCells.
-    Contains timestamps and source pointers.
+    Contains timestamps, source pointers, entity tags, and virtual graph links.
     """
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)
@@ -65,6 +65,9 @@ class Metadata:
     turn_range: tuple = (0, 0)  # (start_turn, end_turn)
     participant_ids: list = field(default_factory=list)
     tags: list = field(default_factory=list)
+    # BetterMemory: Entity tags for grounded pre-filtering & virtual graph linking
+    entities: list = field(default_factory=list)  # ["Paris", "Mom", "Google"]
+    related_memcell_ids: list = field(default_factory=list)  # Virtual graph links
     
     def to_dict(self) -> dict:
         return {
@@ -73,7 +76,9 @@ class Metadata:
             "source_conversation_id": self.source_conversation_id,
             "turn_range": list(self.turn_range),
             "participant_ids": self.participant_ids,
-            "tags": self.tags
+            "tags": self.tags,
+            "entities": self.entities,
+            "related_memcell_ids": self.related_memcell_ids
         }
     
     @classmethod
@@ -84,7 +89,9 @@ class Metadata:
             source_conversation_id=data.get("source_conversation_id", ""),
             turn_range=tuple(data.get("turn_range", [0, 0])),
             participant_ids=data.get("participant_ids", []),
-            tags=data.get("tags", [])
+            tags=data.get("tags", []),
+            entities=data.get("entities", []),
+            related_memcell_ids=data.get("related_memcell_ids", [])
         )
 
 
@@ -175,12 +182,14 @@ class MemScene:
 
 @dataclass
 class ExplicitFact:
-    """Verifiable attribute with temporal tracking."""
+    """Verifiable attribute with temporal tracking and soft-delete support."""
     attribute: str = ""
     value: str = ""
     timestamp: datetime = field(default_factory=datetime.now)
     source_memcell_id: str = ""
     confidence: float = 1.0
+    # BetterMemory: Soft-delete for conflict resolution ("active" or "deprecated")
+    status: str = "active"
     
     def to_dict(self) -> dict:
         return {
@@ -188,7 +197,8 @@ class ExplicitFact:
             "value": self.value,
             "timestamp": self.timestamp.isoformat(),
             "source_memcell_id": self.source_memcell_id,
-            "confidence": self.confidence
+            "confidence": self.confidence,
+            "status": self.status
         }
     
     @classmethod
@@ -198,7 +208,8 @@ class ExplicitFact:
             value=data["value"],
             timestamp=datetime.fromisoformat(data["timestamp"]) if data.get("timestamp") else datetime.now(),
             source_memcell_id=data.get("source_memcell_id", ""),
-            confidence=data.get("confidence", 1.0)
+            confidence=data.get("confidence", 1.0),
+            status=data.get("status", "active")
         )
 
 
@@ -299,26 +310,38 @@ class UserProfile:
     def update_explicit_fact(self, attribute: str, new_fact: ExplicitFact) -> Optional[ConflictRecord]:
         """
         Update an explicit fact with recency-aware conflict resolution.
+        BetterMemory: Marks old fact as DEPRECATED (soft delete) instead of overwriting.
         Returns a ConflictRecord if there was a conflict.
         """
         conflict = None
         if attribute in self.explicit_facts:
             old_fact = self.explicit_facts[attribute]
-            if old_fact.value != new_fact.value:
-                # Conflict detected - use recency to resolve
+            # Skip if old fact is already deprecated
+            if old_fact.status == "deprecated":
+                pass  # Just add the new fact
+            elif old_fact.value != new_fact.value:
+                # Conflict detected - mark old fact as DEPRECATED (soft delete)
+                old_fact.status = "deprecated"
                 conflict = ConflictRecord(
                     attribute=attribute,
                     old_value=old_fact.value,
                     new_value=new_fact.value,
                     old_source=old_fact.source_memcell_id,
                     new_source=new_fact.source_memcell_id,
-                    resolution="recency"
+                    resolution="recency_soft_delete"
                 )
                 self.conflict_history.append(conflict)
         
+        # New fact is always active
+        new_fact.status = "active"
         self.explicit_facts[attribute] = new_fact
         self.last_updated = datetime.now()
         return conflict
+    
+    def get_active_facts(self) -> dict:
+        """Get only active (non-deprecated) explicit facts."""
+        return {k: v for k, v in self.explicit_facts.items() 
+                if not isinstance(v, ExplicitFact) or v.status == "active"}
 
 
 @dataclass 

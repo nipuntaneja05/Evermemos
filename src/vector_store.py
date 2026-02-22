@@ -6,7 +6,7 @@ Handles all interactions with Qdrant for vector storage and retrieval.
 from typing import Optional
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
-from qdrant_client.http.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue
+from qdrant_client.http.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue, MatchAny, PayloadSchemaType
 
 from .config import Config
 from .models import MemCell, MemScene
@@ -48,6 +48,16 @@ class VectorStore:
                 )
             )
             print(f"Created collection: {Config.QDRANT_COLLECTION_MEMSCENES}")
+        
+        # BetterMemory: Create payload index for entity-based filtering
+        try:
+            self.client.create_payload_index(
+                collection_name=Config.QDRANT_COLLECTION_MEMCELLS,
+                field_name="metadata.entities",
+                field_schema=PayloadSchemaType.KEYWORD
+            )
+        except Exception:
+            pass  # Index may already exist
     
     # ==================== MemCell Operations ====================
     
@@ -125,6 +135,45 @@ class VectorStore:
                     match=MatchValue(value=memscene_id)
                 )]
             )
+        
+        results = self.client.search(
+            collection_name=Config.QDRANT_COLLECTION_MEMCELLS,
+            query_vector=query_vector,
+            limit=limit,
+            query_filter=search_filter,
+            with_payload=True,
+            with_vectors=True
+        )
+        
+        return [(MemCell.from_dict(r.payload), r.score) for r in results]
+    
+    def search_memcells_by_entities(self, query_vector: list, entities: list, 
+                                     limit: int = 10) -> list:
+        """
+        BetterMemory: Search MemCells with entity-based pre-filtering.
+        Uses Qdrant's native payload filtering for efficient entity matching.
+        
+        Args:
+            query_vector: Query embedding vector
+            entities: List of entity strings to filter by
+            limit: Max results to return
+            
+        Returns:
+            List of (MemCell, score) tuples matching at least one entity
+        """
+        if not entities:
+            return self.search_memcells(query_vector, limit)
+        
+        # Use MatchAny to find memcells containing any of the query entities
+        search_filter = Filter(
+            should=[
+                FieldCondition(
+                    key="metadata.entities",
+                    match=MatchValue(value=entity)
+                )
+                for entity in entities
+            ]
+        )
         
         results = self.client.search(
             collection_name=Config.QDRANT_COLLECTION_MEMCELLS,

@@ -18,6 +18,7 @@ from .vector_store import get_vector_store
 from .config import Config
 
 
+
 def cosine_similarity(vec1: list, vec2: list) -> float:
     """Compute cosine similarity between two vectors."""
     a = np.array(vec1)
@@ -142,11 +143,45 @@ Provide a concise theme title (2-5 words) and a brief summary."""
         # Update memcell's scene reference
         memcell.memscene_id = scene.id
         
+        # BetterMemory: Virtual graph linking - connect related MemCells via entity overlap
+        self._link_related_memcells(memcell, scene)
+        
         # Store both
         self.vector_store.upsert_memscene(scene)
         self.vector_store.upsert_memcell(memcell)
         
         return scene
+    
+    def _link_related_memcells(self, new_memcell: MemCell, scene: MemScene):
+        """
+        BetterMemory: Virtual graph linking.
+        Connect MemCells that share entity tags within a scene.
+        This creates bidirectional links in metadata.related_memcell_ids.
+        """
+        new_entities = set(getattr(new_memcell.metadata, 'entities', []))
+        if not new_entities:
+            return
+        
+        # Check existing memcells in the scene for entity overlap
+        existing_ids = [mid for mid in scene.memcell_ids if mid != new_memcell.id]
+        if not existing_ids:
+            return
+        
+        existing_memcells = self.vector_store.get_memcells_by_ids(existing_ids)
+        
+        for existing_mc in existing_memcells:
+            existing_entities = set(getattr(existing_mc.metadata, 'entities', []))
+            # Check for entity overlap (case-insensitive)
+            overlap = {e.lower() for e in new_entities} & {e.lower() for e in existing_entities}
+            
+            if overlap:
+                # Add bidirectional links
+                if existing_mc.id not in new_memcell.metadata.related_memcell_ids:
+                    new_memcell.metadata.related_memcell_ids.append(existing_mc.id)
+                if new_memcell.id not in existing_mc.metadata.related_memcell_ids:
+                    existing_mc.metadata.related_memcell_ids.append(new_memcell.id)
+                    # Persist the updated existing memcell
+                    self.vector_store.upsert_memcell(existing_mc)
     
     def _generate_theme(self, episodes: list) -> str:
         """Generate a thematic title from episodes."""
@@ -366,20 +401,31 @@ Extract and respond with JSON:
         return False
     
     def get_profile_summary(self, profile: UserProfile = None) -> str:
-        """Generate a human-readable profile summary."""
+        """Generate a human-readable profile summary with BetterMemory soft-delete."""
         
         if profile is None:
             profile = self.get_profile()
         
         lines = [f"User Profile (ID: {profile.user_id})", "=" * 40, ""]
         
-        # Explicit facts
-        lines.append("EXPLICIT FACTS:")
-        if profile.explicit_facts:
-            for attr, fact in profile.explicit_facts.items():
-                lines.append(f"  - {attr}: {fact.value}")
+        # Active explicit facts
+        lines.append("EXPLICIT FACTS (Active):")
+        active_facts = profile.get_active_facts()
+        if active_facts:
+            for attr, fact in active_facts.items():
+                conf_str = f" (confidence: {fact.confidence:.1f})" if hasattr(fact, 'confidence') else ""
+                lines.append(f"  - {attr}: {fact.value}{conf_str}")
         else:
             lines.append("  (none)")
+        
+        # BetterMemory: Show deprecated facts separately
+        deprecated = {k: v for k, v in profile.explicit_facts.items() 
+                     if isinstance(v, ExplicitFact) and v.status == "deprecated"}
+        if deprecated:
+            lines.append("")
+            lines.append("DEPRECATED FACTS (Soft-deleted):")
+            for attr, fact in deprecated.items():
+                lines.append(f"  - {attr}: {fact.value} [DEPRECATED]")
         
         lines.append("")
         

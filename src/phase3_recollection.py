@@ -1,16 +1,22 @@
 """
-Phase III: Reconstructive Recollection
+Phase III: Reconstructive Recollection (BetterMemory Pipeline)
 
 This module implements active reconstruction-based retrieval guided by
 the principle of necessity and sufficiency.
+
+BetterMemory enhancements:
+- Confidence Router (SwiftMem): Skip sufficiency check when retrieval confidence is high
+- Entity-Driven Pre-filtering: Use entity tags to narrow search space before vector search
+
 Implements:
 - Step 1: MemScene Selection (Hybrid Retrieval with RRF)
 - Step 2: Episode and Foresight Filtering
-- Step 3: Agentic Verification and Query Rewriting
+- Step 3: Agentic Verification and Query Rewriting (with confidence-based bypass)
 """
 
 from datetime import datetime
 from typing import Optional
+import re
 import numpy as np
 from rank_bm25 import BM25Okapi
 
@@ -20,13 +26,73 @@ from .vector_store import get_vector_store
 from .config import Config
 
 
+class EntityExtractor:
+    """
+    BetterMemory: Extract entities from queries for pre-filtering.
+    Simple rule-based extraction (no LLM call needed for queries).
+    """
+    
+    # Common question/stop words that should NOT be treated as entities
+    STOP_WORDS = {
+        "what", "where", "when", "who", "whom", "which", "why", "how",
+        "does", "did", "do", "is", "are", "was", "were", "will", "would",
+        "could", "should", "can", "may", "might", "shall", "has", "have", "had",
+        "the", "a", "an", "this", "that", "these", "those",
+        "tell", "about", "know", "any", "some", "all", "not", "also",
+        "been", "being", "it", "its", "they", "them", "their",
+        "my", "me", "i", "you", "your", "we", "our", "he", "she", "his", "her",
+    }
+    
+    @staticmethod
+    def extract_query_entities(query: str) -> list:
+        """
+        Extract potential entity mentions from a query string.
+        Uses capitalization and common patterns to identify entities.
+        Filters out question words and common stop words.
+        
+        Args:
+            query: The search query
+            
+        Returns:
+            List of entity strings found in the query
+        """
+        entities = set()
+        words = query.split()
+        
+        for i, word in enumerate(words):
+            # Remove punctuation for matching
+            clean = re.sub(r'[^\w]', '', word)
+            if not clean:
+                continue
+            
+            # Skip stop words and question words
+            if clean.lower() in EntityExtractor.STOP_WORDS:
+                continue
+            
+            # Capitalized words (except sentence start) are likely entities
+            if clean[0].isupper() and len(clean) > 1:
+                # Skip common sentence starters unless clearly an entity
+                if i > 0 or len(clean) > 3:
+                    entities.add(clean)
+            
+            # Multi-word entities: check consecutive capitalized words
+            if i > 0 and clean[0].isupper():
+                prev_clean = re.sub(r'[^\w]', '', words[i-1])
+                if prev_clean and prev_clean[0].isupper() and prev_clean.lower() not in EntityExtractor.STOP_WORDS:
+                    entities.add(f"{prev_clean} {clean}")
+        
+        return list(entities)
+
+
 class HybridRetriever:
     """
     Step 1: MemScene Selection (Hybrid Retrieval)
     
+    BetterMemory: Enhanced with Entity-Driven Pre-filtering.
     Fuses dense and sparse retrieval via Reciprocal Rank Fusion (RRF).
     - Dense: Vector similarity using embeddings
     - Sparse: BM25 over Atomic Facts
+    - Entity Filter: Pre-filter candidates by entity match (with fallback)
     """
     
     def __init__(self):
@@ -37,9 +103,11 @@ class HybridRetriever:
         self.top_k_scenes = Config.TOP_K_MEMSCENES
         self._bm25_index = None
         self._bm25_memcells = None
+        self.entity_filter_enabled = Config.ENTITY_FILTER_ENABLED
+        self.entity_filter_min_results = Config.ENTITY_FILTER_MIN_RESULTS
     
     def _build_bm25_index(self, memcells: list = None):
-        """Build or rebuild the BM25 index."""
+        """Build or rebuild the BM25 index (entity-aware)."""
         if memcells is None:
             memcells = self.vector_store.get_all_memcells()
         
@@ -48,24 +116,31 @@ class HybridRetriever:
             self._bm25_memcells = []
             return
         
-        # Tokenize atomic facts for each memcell
+        # Tokenize atomic facts + entity tags for each memcell
+        # BetterMemory: Including entities in BM25 corpus so keyword
+        # searches naturally match entity mentions (e.g. "Paris", "Google")
         tokenized_corpus = []
         for mc in memcells:
             # Combine atomic facts into searchable text
             facts_text = " ".join(mc.atomic_facts).lower()
-            tokens = facts_text.split()
+            # Add entity tags to the corpus for keyword matching
+            entity_text = " ".join(getattr(mc.metadata, 'entities', [])).lower()
+            combined = f"{facts_text} {entity_text}"
+            tokens = combined.split()
             tokenized_corpus.append(tokens)
         
         self._bm25_memcells = memcells
         self._bm25_index = BM25Okapi(tokenized_corpus)
     
-    def retrieve(self, query: str, top_k: int = None) -> list:
+    def retrieve(self, query: str, top_k: int = None, query_entities: list = None) -> list:
         """
         Perform hybrid retrieval combining dense and sparse methods.
+        BetterMemory: Optionally pre-filter by entity tags.
         
         Args:
             query: The search query
             top_k: Number of results to return
+            query_entities: Pre-extracted entities from query for filtering
             
         Returns:
             List of RetrievalResult objects sorted by RRF score
@@ -79,6 +154,13 @@ class HybridRetriever:
         # Dense retrieval
         dense_results = self.vector_store.search_memcells(query_embedding, limit=top_k * 2)
         
+        # BetterMemory: Entity-driven pre-filtering on dense results
+        if self.entity_filter_enabled and query_entities:
+            filtered_dense = self._filter_by_entities(dense_results, query_entities)
+            # Fallback: if too few results after filtering, use unfiltered
+            if len(filtered_dense) >= self.entity_filter_min_results:
+                dense_results = filtered_dense
+        
         # Sparse retrieval (BM25)
         sparse_results = self._bm25_search(query, top_k * 2)
         
@@ -88,6 +170,32 @@ class HybridRetriever:
         # Sort by RRF score and take top k
         fused_results.sort(key=lambda x: x.rrf_score, reverse=True)
         return fused_results[:top_k]
+    
+    def _filter_by_entities(self, results: list, query_entities: list) -> list:
+        """
+        BetterMemory: Filter retrieval results by entity tag overlap.
+        Keeps results where the MemCell's entities intersect with query entities.
+        
+        Args:
+            results: List of (MemCell, score) tuples from dense retrieval
+            query_entities: Entity strings extracted from the query
+            
+        Returns:
+            Filtered list of (MemCell, score) tuples
+        """
+        if not query_entities:
+            return results
+        
+        query_entities_lower = {e.lower() for e in query_entities}
+        filtered = []
+        
+        for memcell, score in results:
+            # Check entity overlap
+            memcell_entities = {e.lower() for e in getattr(memcell.metadata, 'entities', [])}
+            if memcell_entities & query_entities_lower:
+                filtered.append((memcell, score))
+        
+        return filtered
     
     def _bm25_search(self, query: str, top_k: int) -> list:
         """Perform BM25 sparse search."""
@@ -374,8 +482,12 @@ Respond with JSON:
 
 class ReconstructiveRecollection:
     """
-    Main class for Phase III: Reconstructive Recollection.
+    Main class for Phase III: Reconstructive Recollection (BetterMemory).
     Orchestrates the full retrieval pipeline with agentic verification.
+    
+    BetterMemory enhancements:
+    - Confidence Router: Skip sufficiency check when top-1 score > threshold (fast path)
+    - Entity Pre-filtering: Use query entities to pre-filter candidates
     """
     
     def __init__(self):
@@ -383,12 +495,19 @@ class ReconstructiveRecollection:
         self.temporal_filter = TemporalFilter()
         self.sufficiency_verifier = SufficiencyVerifier()
         self.llm = get_llm_client()
+        self.entity_extractor = EntityExtractor()
+        # BetterMemory: Confidence Router threshold
+        self.confidence_threshold = Config.CONFIDENCE_ROUTER_THRESHOLD
     
     def recall(self, query: str, current_time: datetime = None,
                require_sufficient: bool = True,
                max_episodes: int = None) -> dict:
         """
         Perform full reconstructive recollection for a query.
+        
+        BetterMemory: Confidence Router
+        - If top-1 retrieval score > threshold, SKIP sufficiency check (fast path)
+        - Otherwise, run the full verification loop as before
         
         Args:
             query: The search/retrieval query
@@ -405,33 +524,76 @@ class ReconstructiveRecollection:
         if max_episodes is None:
             max_episodes = Config.TOP_K_EPISODES
         
-        # Track all queries and results
+        # BetterMemory: Extract entities from query for pre-filtering
+        query_entities = self.entity_extractor.extract_query_entities(query)
+        
+        # Step 1: Hybrid Retrieval (with entity pre-filtering)
+        retrieval_results = self.hybrid_retriever.retrieve(
+            query, query_entities=query_entities
+        )
+        
+        # Step 2: Temporal Filtering
+        filtered_results = self.temporal_filter.filter_results(
+            retrieval_results, current_time
+        )
+        
+        # Sort by score and take top results
+        filtered_results.sort(key=lambda x: x.rrf_score, reverse=True)
+        top_results = filtered_results[:max_episodes]
+        
+        # BetterMemory: CONFIDENCE ROUTER via BM25 Heuristic (fast path)
+        # Instead of an arbitrary score threshold, use keyword evidence:
+        # If ANY top result has BM25 sparse_score > 0, query keywords matched
+        # stored facts/entities → context is relevant → skip LLM sufficiency check.
+        # Only fall back to slow LLM verification when BM25 misses entirely.
+        has_keyword_match = any(r.sparse_score > 0 for r in top_results)
+        
+        if top_results and has_keyword_match:
+            context = self._build_context(top_results)
+            return {
+                "query": query,
+                "current_time": current_time.isoformat(),
+                "iterations": 1,
+                "queries_used": [query],
+                "results": top_results,
+                "episodes": [r.memcell.episode for r in top_results],
+                "valid_foresights": self._collect_foresights(top_results),
+                "atomic_facts": self._collect_facts(top_results),
+                "context": context,
+                "memscenes": [],  # Skip memscene fetch on fast path
+                "confidence_routed": True,
+                "query_entities": query_entities
+            }
+        
+        # Slow path: full verification loop (only for low-confidence retrievals)
         all_queries = [query]
-        all_results = []
+        all_results = list(filtered_results)
         iteration = 0
         
+        # Select MemScenes (only on slow path)
+        top_scenes = self.hybrid_retriever.select_memscenes(retrieval_results)
+        
         while iteration <= self.sufficiency_verifier.max_rewrites:
-            # Step 1: Hybrid Retrieval
-            current_query = all_queries[-1]
-            retrieval_results = self.hybrid_retriever.retrieve(current_query)
-            
-            # Step 1b: Select MemScenes
-            top_scenes = self.hybrid_retriever.select_memscenes(retrieval_results)
-            
-            # Step 2: Temporal Filtering
-            filtered_results = self.temporal_filter.filter_results(
-                retrieval_results, current_time
-            )
-            
-            # Merge with existing results (deduplicate by memcell ID)
-            seen_ids = {r.memcell.id for r in all_results}
-            for result in filtered_results:
-                if result.memcell.id not in seen_ids:
-                    all_results.append(result)
-                    seen_ids.add(result.memcell.id)
-            
-            # Re-rank all results
-            all_results.sort(key=lambda x: x.rrf_score, reverse=True)
+            if iteration > 0:
+                # Re-retrieve with rewritten query
+                current_query = all_queries[-1]
+                new_results = self.hybrid_retriever.retrieve(
+                    current_query, query_entities=query_entities
+                )
+                
+                new_filtered = self.temporal_filter.filter_results(
+                    new_results, current_time
+                )
+                
+                # Merge with existing results (deduplicate by memcell ID)
+                seen_ids = {r.memcell.id for r in all_results}
+                for result in new_filtered:
+                    if result.memcell.id not in seen_ids:
+                        all_results.append(result)
+                        seen_ids.add(result.memcell.id)
+                
+                # Re-rank
+                all_results.sort(key=lambda x: x.rrf_score, reverse=True)
             
             # Build context from top results
             top_results = all_results[:max_episodes]
@@ -471,7 +633,9 @@ class ReconstructiveRecollection:
             "valid_foresights": self._collect_foresights(final_results),
             "atomic_facts": self._collect_facts(final_results),
             "context": self._build_context(final_results),
-            "memscenes": [s for s, _ in top_scenes] if 'top_scenes' in dir() else []
+            "memscenes": [s for s, _ in top_scenes] if top_scenes else [],
+            "confidence_routed": False,
+            "query_entities": query_entities
         }
     
     def recall_simple(self, query: str, top_k: int = 5) -> list:
@@ -485,7 +649,9 @@ class ReconstructiveRecollection:
         Returns:
             List of RetrievalResult objects
         """
-        results = self.hybrid_retriever.retrieve(query, top_k)
+        # BetterMemory: Extract entities for pre-filtering
+        query_entities = self.entity_extractor.extract_query_entities(query)
+        results = self.hybrid_retriever.retrieve(query, top_k, query_entities=query_entities)
         return self.temporal_filter.filter_results(results, datetime.now())
     
     def _build_context(self, results: list) -> str:
@@ -506,6 +672,11 @@ class ReconstructiveRecollection:
             if mc.atomic_facts:
                 facts_text = "\n".join(f"  - {f}" for f in mc.atomic_facts[:5])
                 section += f"\n\nKey Facts:\n{facts_text}"
+            
+            # BetterMemory: Include entity tags in context
+            if hasattr(mc.metadata, 'entities') and mc.metadata.entities:
+                entities_text = ", ".join(mc.metadata.entities[:10])
+                section += f"\n\nEntities: {entities_text}"
             
             sections.append(section)
         

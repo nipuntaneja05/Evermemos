@@ -1,20 +1,92 @@
 """
-Phase I: Episodic Trace Formation
+Phase I: Episodic Trace Formation (BetterMemory Pipeline)
 
 This module transforms continuous interaction history into discrete, stable memory units (MemCells).
-Implements:
-- Step 1: Contextual Segmentation (Semantic Boundary Detection)
-- Step 2: Narrative Synthesis (Episode Rewriting)
-- Step 3: Structural Derivation (MemCell Extraction)
+Optimized for Signal-to-Noise Ratio with:
+- Priority Filter (SwiftMem): Discard chitchat before LLM processing
+- Unified Prompt Packing: Single LLM call for narrative + facts + foresights + entities
+- S-A-O Triples: Subject-Action-Object structured fact extraction
+- Entity Extraction: Tag MemCells with entities for grounded retrieval
 """
 
 from datetime import datetime, timedelta
 from typing import Optional
 import json
+import re
 
 from .models import MemCell, Foresight, Metadata, DialogueTurn
 from .llm_client import get_llm_client
 from .config import Config
+
+
+class PriorityFilter:
+    """
+    BetterMemory: SwiftMem Priority Filter
+    
+    Discards low-information "chitchat" turns (e.g., "Ok", "Thanks", "Haha") 
+    before LLM processing to increase signal-to-noise ratio and save ~30% API costs.
+    """
+    
+    def __init__(self):
+        self.enabled = Config.PRIORITY_FILTER_ENABLED
+        self.max_words = Config.CHITCHAT_MAX_WORDS
+        self.patterns = [p.lower() for p in Config.CHITCHAT_PATTERNS]
+    
+    def filter_turns(self, turns: list) -> list:
+        """
+        Filter out chitchat turns, preserving informative content.
+        
+        Args:
+            turns: List of DialogueTurn objects
+            
+        Returns:
+            Filtered list with chitchat removed. Always preserves at least 2 turns.
+        """
+        if not self.enabled or len(turns) <= 2:
+            return turns
+        
+        filtered = []
+        for turn in turns:
+            if not self._is_chitchat(turn):
+                filtered.append(turn)
+        
+        # Safety: always keep at least 2 turns (never return empty)
+        if len(filtered) < 2:
+            return turns
+        
+        return filtered
+    
+    def _is_chitchat(self, turn: DialogueTurn) -> bool:
+        """Check if a turn is low-information chitchat."""
+        content = turn.content.strip().lower()
+        
+        # Remove punctuation for matching
+        clean = re.sub(r'[^\w\s]', '', content).strip()
+        
+        # Check word count
+        words = clean.split()
+        if len(words) > self.max_words:
+            return False  # Too many words to be chitchat
+        
+        # Exact match against known chitchat patterns
+        if clean in self.patterns:
+            return True
+        
+        # Single word responses that aren't informative
+        if len(words) == 1 and len(clean) <= 4:
+            return True
+        
+        return False
+    
+    def get_stats(self, original_count: int, filtered_count: int) -> dict:
+        """Get filtering statistics."""
+        removed = original_count - filtered_count
+        return {
+            "original_turns": original_count,
+            "filtered_turns": filtered_count,
+            "removed": removed,
+            "savings_pct": round(removed / max(original_count, 1) * 100, 1)
+        }
 
 
 class SemanticBoundaryDetector:
@@ -188,30 +260,34 @@ Write the narrative summary:"""
 
 class MemCellExtractor:
     """
-    Step 3: Structural Derivation
+    Step 3: Structural Derivation (BetterMemory Enhanced)
     
     Extracts the constrained schema from the rewritten Episode to create a MemCell.
-    Produces: c = (E, F, P, M)
+    Produces: c = (E, F, P, M) with BetterMemory enhancements:
     - E: Episode (the narrative)
-    - F: Atomic Facts (discrete, verifiable statements)
+    - F: Atomic Facts as S-A-O triples (Subject-Action-Object)
     - P: Foresight (forward-looking inferences with temporal validity)
-    - M: Metadata (contextual grounding)
+    - M: Metadata with Entity Tags for grounded retrieval
     """
     
     SYSTEM_PROMPT = """You are a structured information extractor for a memory system.
-Your job is to extract atomic facts, foresights (future implications), and metadata from narrative episodes.
+Your job is to extract atomic facts, foresights (future implications), entities, and metadata from narrative episodes.
 
-ATOMIC FACTS:
-- Discrete, verifiable statements
-- Each fact should be independently true
+ATOMIC FACTS (Subject-Action-Object format):
+- Each fact should be a clear statement in Subject-Action-Object format
+- Example: "User bought a Tesla Model 3", "User works at Google as engineer"
+- Each fact should be independently verifiable
 - Include user preferences, attributes, decisions, and stated information
-- Format: clear, concise statements
 
 FORESIGHTS (Forward-looking inferences):
 - Plans, intentions, goals
 - Temporary states (diets, projects, activities)
 - Predictions or expectations
 - Each must include temporal validity if determinable
+
+ENTITIES:
+- Extract named entities: People, Places, Organizations, Objects
+- These are used for precise retrieval filtering
 
 METADATA TAGS:
 - Key themes or topics
@@ -250,7 +326,8 @@ METADATA TAGS:
             source_conversation_id=conversation_id,
             turn_range=turn_range,
             participant_ids=list(set(t.speaker for t in turns)),
-            tags=extraction.get("tags", [])
+            tags=extraction.get("tags", []),
+            entities=extraction.get("entities", [])
         )
         
         # Parse foresights
@@ -282,9 +359,8 @@ CURRENT TIME: {current_time.strftime("%Y-%m-%d %H:%M")}
 Extract and respond with JSON:
 {{
     "atomic_facts": [
-        "Discrete, verifiable statement 1",
-        "Discrete, verifiable statement 2",
-        ...
+        "Subject-Action-Object statement 1 (e.g., 'User started a vegan diet')",
+        "Subject-Action-Object statement 2 (e.g., 'User works at Google as senior engineer')"
     ],
     "foresights": [
         {{
@@ -293,28 +369,21 @@ Extract and respond with JSON:
             "duration_value": "number of days/weeks if fixed (e.g., 14 for 2 weeks), null otherwise",
             "start_offset_days": 0,
             "expiry_date": "YYYY-MM-DD format if determinable from context, null otherwise"
-        }},
-        ...
+        }}
     ],
-    "tags": ["tag1", "tag2", ...]
+    "entities": ["Person Name", "Place Name", "Organization", "Important Object"],
+    "tags": ["tag1", "tag2"]
 }}
 
-IMPORTANT FORESIGHT EXTRACTION RULES:
-1. ALWAYS try to extract temporal bounds from the conversation
-2. Look for phrases like: "next month", "2 weeks", "in March", "until Friday", "for a year"
-3. Convert relative times to actual dates using CURRENT TIME as reference:
-   - "next week" = 7 days from current time
-   - "next month" = 30 days from current time  
-   - "in 2 weeks" = 14 days, expiry_date = current + 14 days
-   - "for a year" = 365 days
-4. For medical treatments (antibiotics, prescriptions): typical duration is 7-14 days
-5. For trips/vacations: extract the specific dates or duration mentioned
-6. For learning goals, career plans: use "ongoing" if no end date specified
-7. If expiry_date can be calculated, ALWAYS include it in YYYY-MM-DD format
-
-Rules for atomic facts:
-- Atomic facts should be independently verifiable
-- Tags should be high-level categories"""
+IMPORTANT RULES:
+1. Atomic facts MUST be in Subject-Action-Object format for precise conflict detection
+2. ENTITIES: Extract ALL named entities (people, places, organizations, objects mentioned)
+3. FORESIGHT: ALWAYS try to extract temporal bounds from the conversation
+4. Look for phrases like: "next month", "2 weeks", "in March", "until Friday", "for a year"
+5. Convert relative times to actual dates using CURRENT TIME as reference
+6. For medical treatments: typical duration is 7-14 days
+7. For trips/vacations: extract specific dates or duration mentioned
+8. Tags should be high-level categories (health, work, travel, etc.)"""
         
         result = self.llm.generate_json(prompt, self.SYSTEM_PROMPT)
         
@@ -323,6 +392,7 @@ Rules for atomic facts:
             return {
                 "atomic_facts": [episode],
                 "foresights": [],
+                "entities": [],
                 "tags": []
             }
         
@@ -382,11 +452,18 @@ Rules for atomic facts:
 
 class EpisodicTraceFormation:
     """
-    Main class for Phase I: Episodic Trace Formation.
+    Main class for Phase I: Episodic Trace Formation (BetterMemory).
     Orchestrates the complete pipeline from dialogue to MemCells.
+    
+    BetterMemory enhancements:
+    - Priority Filter: Removes chitchat before processing
+    - Unified Prompt: Single LLM call for narrative + facts + foresights + entities
+    - S-A-O Facts: Structured fact extraction for better conflict detection
+    - Entity Tags: Named entity extraction for grounded retrieval
     """
     
     def __init__(self):
+        self.priority_filter = PriorityFilter()
         self.boundary_detector = SemanticBoundaryDetector()
         self.narrative_synthesizer = NarrativeSynthesizer()
         self.memcell_extractor = MemCellExtractor()
@@ -397,7 +474,10 @@ class EpisodicTraceFormation:
         """
         Process a full conversation transcript into MemCells.
         
-        OPTIMIZATION: Uses combined prompt for narrative + extraction (1 LLM call instead of 2).
+        BetterMemory optimizations:
+        1. Priority Filter: Remove chitchat turns before processing
+        2. Unified Prompt: Combined narrative + extraction in ONE LLM call
+        3. Entity Extraction: Tag MemCells with entities for grounded retrieval
         """
         if current_time is None:
             current_time = datetime.now()
@@ -408,16 +488,19 @@ class EpisodicTraceFormation:
         if not turns:
             return []
         
-        # Detect episode boundaries (skipped for short conversations)
-        segments = self.boundary_detector.detect_boundaries(turns)
+        # BetterMemory: Priority Filter - remove chitchat
+        filtered_turns = self.priority_filter.filter_turns(turns)
         
-        # Process each segment with COMBINED prompt
+        # Detect episode boundaries (skipped for short conversations)
+        segments = self.boundary_detector.detect_boundaries(filtered_turns)
+        
+        # Process each segment with UNIFIED prompt
         memcells = []
         for start_idx, end_idx in segments:
-            segment_turns = turns[start_idx:end_idx + 1]
+            segment_turns = filtered_turns[start_idx:end_idx + 1]
             
-            # OPTIMIZATION: Combined narrative + extraction in ONE LLM call
-            memcell = self._process_segment_combined(
+            # BetterMemory: Unified prompt for all extraction
+            memcell = self._process_segment_unified(
                 segment_turns, conversation_id, current_time
             )
             
@@ -429,51 +512,66 @@ class EpisodicTraceFormation:
         
         return memcells
     
-    def _process_segment_combined(self, turns: list, conversation_id: str, 
+    def _process_segment_unified(self, turns: list, conversation_id: str, 
                                    current_time: datetime) -> MemCell:
         """
-        OPTIMIZATION: Process a segment with a single combined LLM call.
+        BetterMemory: Unified prompt packing - single LLM call for:
+        - Episode narrative (third-person summary)
+        - Atomic facts (S-A-O triples)
+        - Foresights (temporal plans)
+        - Entity tags (people, places, objects)
+        
         For very short conversations (<=3 turns), use simple extraction without LLM.
         """
         # OPTIMIZATION: For very short conversations, skip LLM entirely
         if len(turns) <= 3:
             return self._process_segment_simple(turns, conversation_id, current_time)
+        
         # Format dialogue
         dialogue_text = "\n".join([f"{t.speaker}: {t.content}" for t in turns])
         
-        prompt = f"""Analyze this dialogue and provide BOTH a narrative summary AND structured extraction.
+        prompt = f"""Analyze this dialogue and provide a COMPLETE structured memory extraction in ONE response.
 
 DIALOGUE:
 {dialogue_text}
 
 CURRENT TIME: {current_time.strftime("%Y-%m-%d %H:%M")}
 
-Respond with JSON containing:
+Respond with JSON containing ALL of the following:
 {{
-    "episode": "A clear, third-person narrative summary of the dialogue. Resolve all pronouns and references.",
+    "episode": "A clear, third-person narrative summary of the dialogue. Resolve all pronouns and references. 2-4 sentences.",
     "atomic_facts": [
-        "Discrete, verifiable statement 1",
-        "Discrete, verifiable statement 2"
+        "Subject-Action-Object statement (e.g., 'User started a vegan diet')",
+        "Subject-Action-Object statement (e.g., 'User works at Google as senior engineer')"
     ],
     "foresights": [
         {{
             "content": "Any plan/intention/temporary state mentioned",
             "duration_type": "fixed|ongoing|indefinite",
             "duration_value": null,
-            "start_offset_days": 0
+            "start_offset_days": 0,
+            "expiry_date": "YYYY-MM-DD if determinable, null otherwise"
         }}
     ],
-    "tags": ["tag1", "tag2"]
+    "entities": ["Person Name", "Place Name", "Organization", "Important Object"],
+    "tags": ["high-level category 1", "high-level category 2"]
 }}
 
-Rules:
-- Episode should be 2-4 sentences, third-person perspective
-- Atomic facts: each independently verifiable
-- Foresights: include duration if mentioned (e.g., "10 days" = fixed, 10)
-- Tags: high-level categories (health, work, travel, etc.)"""
+CRITICAL RULES:
+- Episode: 2-4 sentences, third-person perspective, resolve all references
+- Atomic facts: MUST be in Subject-Action-Object format for conflict detection
+- Entities: Extract ALL named entities (people, places, organizations, key objects)
+- Foresights: Include temporal duration if mentioned (e.g., "10 days" = fixed, 10)
+- Tags: High-level categories (health, work, travel, personal, etc.)
+- If no foresights exist, return empty list
+- If no entities found, return empty list"""
 
-        system_prompt = """You are a memory system that converts dialogues into structured memories.
-Extract key information accurately and completely."""
+        system_prompt = """You are BetterMemory - an advanced memory system that converts dialogues into structured memories.
+Extract key information accurately and completely in a single pass. Focus on:
+1. Clear narrative summaries
+2. Precise Subject-Action-Object facts
+3. Named entity extraction for retrieval
+4. Temporal plan detection"""
 
         result = self.llm.generate_json(prompt, system_prompt)
         
@@ -482,7 +580,7 @@ Extract key information accurately and completely."""
             episode = self.narrative_synthesizer.synthesize(turns, conversation_id)
             return self.memcell_extractor.extract(episode, turns, conversation_id, current_time)
         
-        # Build MemCell from combined result
+        # Build MemCell from unified result
         turn_range = (turns[0].turn_id, turns[-1].turn_id) if turns else (0, 0)
         
         metadata = Metadata(
@@ -491,7 +589,8 @@ Extract key information accurately and completely."""
             source_conversation_id=conversation_id,
             turn_range=turn_range,
             participant_ids=list(set(t.speaker for t in turns)),
-            tags=result.get("tags", [])
+            tags=result.get("tags", []),
+            entities=result.get("entities", [])
         )
         
         # Parse foresights
@@ -513,6 +612,7 @@ Extract key information accurately and completely."""
         """
         Simple extraction for very short conversations (no LLM call).
         Just concatenates the dialogue as the episode.
+        BetterMemory: Also extracts basic entities from content.
         """
         # Create simple episode from dialogue
         episode_parts = []
@@ -523,6 +623,9 @@ Extract key information accurately and completely."""
         # Extract simple facts (just the content)
         atomic_facts = [turn.content for turn in turns if turn.speaker.lower() == "user"]
         
+        # BetterMemory: Basic entity extraction from content (no LLM needed)
+        entities = self._extract_entities_simple(turns)
+        
         turn_range = (turns[0].turn_id, turns[-1].turn_id) if turns else (0, 0)
         
         metadata = Metadata(
@@ -531,7 +634,8 @@ Extract key information accurately and completely."""
             source_conversation_id=conversation_id,
             turn_range=turn_range,
             participant_ids=list(set(t.speaker for t in turns)),
-            tags=["short_conversation"]
+            tags=["short_conversation"],
+            entities=entities
         )
         
         return MemCell(
@@ -540,6 +644,23 @@ Extract key information accurately and completely."""
             foresights=[],
             metadata=metadata
         )
+    
+    def _extract_entities_simple(self, turns: list) -> list:
+        """
+        Simple rule-based entity extraction for short conversations.
+        Extracts capitalized words that look like proper nouns.
+        """
+        entities = set()
+        for turn in turns:
+            # Find capitalized words (likely proper nouns)
+            words = turn.content.split()
+            for i, word in enumerate(words):
+                clean = re.sub(r'[^\w]', '', word)
+                if clean and clean[0].isupper() and len(clean) > 1:
+                    # Skip first word of sentence and common words
+                    if i > 0 or len(clean) > 3:
+                        entities.add(clean)
+        return list(entities)
     
     def process_turns(self, turns: list, conversation_id: str = "",
                      current_time: datetime = None) -> list:
@@ -560,13 +681,16 @@ Extract key information accurately and completely."""
         if not turns:
             return []
         
+        # BetterMemory: Priority Filter
+        filtered_turns = self.priority_filter.filter_turns(turns)
+        
         # Detect episode boundaries
-        segments = self.boundary_detector.detect_boundaries(turns)
+        segments = self.boundary_detector.detect_boundaries(filtered_turns)
         
         # Process each segment
         memcells = []
         for start_idx, end_idx in segments:
-            segment_turns = turns[start_idx:end_idx + 1]
+            segment_turns = filtered_turns[start_idx:end_idx + 1]
             
             # Synthesize narrative
             episode = self.narrative_synthesizer.synthesize(
@@ -640,7 +764,6 @@ Extract key information accurately and completely."""
     
     def _parse_line(self, line: str) -> Optional[dict]:
         """Parse a single line to extract speaker and content."""
-        import re
         
         # Pattern 1: [timestamp] Speaker: content
         match = re.match(r'\[([^\]]+)\]\s*(\w+):\s*(.+)', line)

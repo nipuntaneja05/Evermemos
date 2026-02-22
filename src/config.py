@@ -45,7 +45,7 @@ class Config:
     SKIP_BOUNDARY_DETECTION_THRESHOLD: int = 0  # Always use LLM for accuracy
     
     # Semantic Boundary Detection
-    SLIDING_WINDOW_SIZE: int = 5  # Number of turns to analyze
+    SLIDING_WINDOW_SIZE: int = 3  # Reduced from 5 for finer-grained boundary detection
     TOPIC_SHIFT_THRESHOLD: float = 0.7  # Confidence threshold for topic shift
     
     # MemScene Clustering
@@ -59,6 +59,28 @@ class Config:
     
     # Verification Loop
     MAX_QUERY_REWRITES: int = 3  # Maximum rewrite iterations
+    
+    # ==================== BetterMemory Pipeline ====================
+    
+    # Confidence Router (Phase 3 - SwiftMem)
+    # If top-1 retrieval score > threshold, skip sufficiency check (fast path)
+    CONFIDENCE_ROUTER_THRESHOLD: float = 0.30
+    
+    # Priority Filter (Phase 1 - SwiftMem)
+    # Discard chitchat turns before LLM processing
+    PRIORITY_FILTER_ENABLED: bool = True
+    CHITCHAT_MAX_WORDS: int = 5  # Turns with <= this many words are candidates for filtering
+    CHITCHAT_PATTERNS: list = [
+        "ok", "okay", "sure", "thanks", "thank you", "bye", "goodbye",
+        "hi", "hello", "hey", "yeah", "yes", "no", "nope", "yep",
+        "haha", "lol", "hehe", "hmm", "hm", "ah", "oh", "wow",
+        "cool", "nice", "great", "alright", "fine", "sounds good",
+        "got it", "i see", "right", "exactly", "agreed",
+    ]
+    
+    # Entity-Driven Pre-filtering (Phase 3 - Grounding)
+    ENTITY_FILTER_ENABLED: bool = True
+    ENTITY_FILTER_MIN_RESULTS: int = 3  # Fallback to unfiltered if < this many results
     
     @classmethod
     def validate(cls) -> bool:
