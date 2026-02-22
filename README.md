@@ -479,3 +479,50 @@ MIT License
 **Built using Groq (Llama 3.3 70B), Ollama (Qwen 2.5 3B), and Qdrant**
 
 *Scale evaluation: 500 conversations, 495 MemCells, 84.8% deduplication, 455 conflicts resolved ✅*
+
+INGESTION (per conversation ~16s)
+───────────────────────────────────────────────────────
+Raw Transcript
+    │
+    ▼
+[Phase 1 — Episodic Trace Formation]  phase1_episodic.py
+    ├─ 🤖 LLM: Topic boundary detection     (sliding window of 5 turns → is this a new topic?)
+    ├─ 🤖 LLM: Episode summarisation        (compress turns into a narrative episode)
+    ├─ 🤖 LLM: Atomic fact extraction       (pull discrete facts from episode)
+    └─ 🤖 LLM: Foresight extraction         (detect future plans/dates → Foresight objects)
+          │
+          └─→ Produces: MemCells  (1 per topic segment, stored in Qdrant)
+    │
+    ▼
+[Phase 2 — Semantic Consolidation]  phase2_consolidation.py
+    ├─ 🔢 Embedding: embed MemCell          (local Qwen2 1.5B, no API call)
+    ├─ 🔢 Vector similarity: cluster into MemScene  (cosine sim > 0.70 threshold)
+    ├─ 🤖 LLM: Conflict detection           (compare new facts vs existing profile)
+    └─ 🤖 LLM: Profile update / trait inference
+          │
+          └─→ Produces: MemScenes (clusters), ConflictRecords, UserProfile updates
+    │
+    ▼
+[BM25 Index Rebuild]  — local, fast, in-memory
+
+
+RETRIEVAL (per query ~4–7s)
+───────────────────────────────────────────────────────
+User Query
+    │
+    ▼
+[Phase 3 — Reconstructive Recollection]  phase3_recollection.py
+    ├─ 🔢 Embedding: embed query            (local Qwen2 1.5B)
+    ├─ 🌐 Qdrant: dense vector search       (remote cloud call)
+    ├─ ⚡ BM25: sparse keyword search       (local, instant)
+    ├─ ⚡ RRF fusion                         (merge dense + sparse rankings, local)
+    ├─ ⚡ Temporal filter                    (drop expired Foresights, local)
+    │
+    ├─ 🤖 LLM: Sufficiency check            (is the retrieved context enough?)
+    │     └─ IF NO (up to 3 retries):
+    │         ├─ 🤖 LLM: Query rewriting    (generate 2-3 better sub-queries)
+    │         └─ repeat search + sufficiency check
+    │
+    └─ 🤖 LLM: Final answer generation
+          │
+          └─→ Returns: Answer + episodes + facts + foresights
