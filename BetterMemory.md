@@ -50,7 +50,8 @@ BetterMemory addresses each with **zero additional dependencies** — using sign
 │  → Profile (with soft-delete conflict handling)                   │
 │                                                                      │
 │  RETRIEVAL:                                                          │
-│  Query → Embed → Dense Search +  Entity-Aware BM25 → RRF Fusion  │
+│  Query → Embed → Dense Search +  Entity-Aware BM25 → RRF Fusion 
+if confidence score>0.8 then return else go to reranker │
 │  →  BM25 Heuristic Check (keyword match? → SKIP LLM)             │
 │  → Return in ~1.8s (no LLM calls in query path!)                   │
 │                                                                      │
@@ -178,7 +179,7 @@ Now "Google" matches via BM25 keyword search, even when the atomic fact doesn't 
 ---
 
 ## Enhancement 4: S-A-O Atomic Facts
-> Inspired by: **A-MEM** (structured atomic memory representation)
+> Inspired by:  (structured atomic memory representation)
 
 ### The Problem
 
@@ -323,7 +324,7 @@ Query-time entity extraction must be **instant** (~0ms). Loading a NER model (sp
 ---
 
 ## Enhancement 10: Mixed-Confidence Reranking (Cross-Encoder)
-> Inspired by: **HIMem** (cross-encoder reranking for precision)
+> Inspired by: (cross-encoder reranking for precision)
 
 ### The Problem
 

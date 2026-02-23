@@ -24,7 +24,7 @@
 - **MemCells Created:** 100
 - **MemScenes Formed:** 25 (semantic clusters)
 - **Raw Facts Extracted:** 475
-- **Unique Facts:** 207
+- **Unique Facts:** 207w
 
 ### Conflict Detection ✅
 
@@ -85,11 +85,6 @@
 - **Query Entities:** work
 - **Answer:** A user is considering switching to a new company due to their current startup not doing well and seeking stability. The user has started interviewing and has an upcoming interview at Google for a posi...
 
-**Q:** What are the user's hobbies?
-- **Latency:** 1190ms ⚡ (confidence-routed)
-- **Episodes Retrieved:** 8
-- **Query Entities:** hobbies
-- **Answer:** The user's parents are visiting them next month and will be staying for about 2 weeks. They live in Florida, so the user does not get to see them often. The user plans to take their parents to see the...
 
 **Q:** Does the user have any health conditions?
 - **Latency:** 1192ms ⚡ (confidence-routed)

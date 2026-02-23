@@ -97,11 +97,6 @@
 - **Query Entities:** pets
 - **Answer:** The user made a delicious vegan curry the previous night, which included chickpeas, coconut milk, tomatoes, and lots of spices. The user has been fully vegan for about 2 months and has noticed an incr...
 
-**Q:** What does the user do for exercise or fitness?
-- **Latency:** 1151ms ⚡ (confidence-routed)
-- **Episodes Retrieved:** 8
-- **Query Entities:** fitness, exercise
-- **Answer:** The user consulted a nutritionist who recommended increasing protein intake for muscle building. The user is focusing on eggs, Greek yogurt, chicken, and aims to consume 150g of protein per day. The u...
 
 ---
 
@@ -113,7 +108,7 @@
 
 ## Comparison with Original Pipeline
 
-| Metric | Original (100) | BetterMemory (100) |
+| Metric | Original (100) | BetterMemory (300) |
 |--------|----------------|--------------------|
 | MemCells | 100 | 300 |
 | MemScenes | 37 | 31 |
