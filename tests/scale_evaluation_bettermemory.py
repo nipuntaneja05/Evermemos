@@ -204,11 +204,11 @@ def run_bettermemory_evaluation(conversations: List[Dict], scale: int) -> Better
     evo.phase3.hybrid_retriever.refresh_bm25_index()
     
     sample_queries = [
-        "What is the user's diet?",
-        "Where does the user work?",
-        "What are the user's hobbies?",
-        "Does the user have any health conditions?",
-        "Where is the user planning to travel?"
+        "What is the user's diet or food preferences?",
+        "Where does the user work and what is their job?",
+        "Tell me about the user's family.",
+        "Does the user have any pets?",
+        "What does the user do for exercise or fitness?"
     ]
     
     latencies = []
@@ -382,10 +382,10 @@ def save_bettermemory_report(metrics: BetterMemoryMetrics, output_dir: Path):
 
 
 def main():
-    """Run BetterMemory evaluation on 100 conversations."""
+    """Run BetterMemory evaluation on 300 conversations."""
     console.print(Panel.fit(
         "[bold magenta]EVERMEMOS BETTERMEMORY SCALE EVALUATION[/bold magenta]\n"
-        "Testing BetterMemory pipeline on 100 conversations",
+        "Testing BetterMemory pipeline on 300 conversations",
         border_style="magenta"
     ))
     
@@ -394,13 +394,13 @@ def main():
     results_dir.mkdir(exist_ok=True)
     
     # Load existing conversations
-    conv_file = data_dir / "conversations_100.json"
+    conv_file = data_dir / "conversations_300.json"
     
     if not conv_file.exists():
         # Generate if doesn't exist
-        console.print(f"\n[yellow]Generating 100 conversations...[/yellow]")
+        console.print(f"\n[yellow]Generating 300 conversations...[/yellow]")
         from generate_conversations import generate_all_conversations
-        generate_all_conversations(100, data_dir)
+        generate_all_conversations(300, data_dir)
     
     # Load conversations
     conversations = load_conversations(conv_file)
@@ -408,7 +408,7 @@ def main():
     console.print(f"\n[bold]Loaded {len(conversations)} conversations ({total_turns} turns)[/bold]")
     
     # Run the BetterMemory evaluation
-    metrics = run_bettermemory_evaluation(conversations, 100)
+    metrics = run_bettermemory_evaluation(conversations, 300)
     
     # Display results
     console.print(f"\n[green]✓ BetterMemory Evaluation Complete:[/green]")

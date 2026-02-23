@@ -64,7 +64,10 @@ class Config:
     
     # Confidence Router (Phase 3 - SwiftMem)
     # If top-1 retrieval score > threshold, skip sufficiency check (fast path)
-    CONFIDENCE_ROUTER_THRESHOLD: float = 0.30
+    CONFIDENCE_ROUTER_THRESHOLD: float = 0.7
+    
+    # Cross-Encoder Reranker
+    CROSS_ENCODER_MODEL: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
     
     # Priority Filter (Phase 1 - SwiftMem)
     # Discard chitchat turns before LLM processing

@@ -19,6 +19,7 @@ from typing import Optional
 import re
 import numpy as np
 from rank_bm25 import BM25Okapi
+from sentence_transformers import CrossEncoder
 
 from .models import MemCell, MemScene, Foresight, RetrievalResult
 from .llm_client import get_llm_client
@@ -528,6 +529,51 @@ Respond with JSON:
         return result.get("queries", [])[:3]
 
 
+class CrossEncoderReranker:
+    """
+    Step 1.5: Cross-Encoder Reranking
+    
+    Refines hybrid retrieval results by scoring the query against 
+    full MemCell content using a transformer-based cross-encoder.
+    """
+    
+    def __init__(self, model_name: Optional[str] = None):
+        if model_name is None:
+            model_name = Config.CROSS_ENCODER_MODEL
+        self.model = CrossEncoder(model_name)
+    
+    def rerank(self, query: str, results: list) -> list:
+        """
+        Rerank retrieval results using Cross-Encoder scoring.
+        
+        Args:
+            query: User search query
+            results: List of RetrievalResult objects
+            
+        Returns:
+            Reranked list of RetrievalResult objects
+        """
+        if not results:
+            return []
+        
+        # Prepare pairs: (query, document_text)
+        pairs = []
+        for r in results:
+            doc_text = r.memcell.get_searchable_text()
+            pairs.append((query, doc_text))
+        
+        # Batch score
+        scores = self.model.predict(pairs)
+        
+        # Update results with rerank scores
+        for i, score in enumerate(scores):
+            results[i].rerank_score = float(score)
+        
+        # Sort results by rerank score
+        results.sort(key=lambda x: x.rerank_score, reverse=True)
+        return results
+
+
 class ReconstructiveRecollection:
     """
     Main class for Phase III: Reconstructive Recollection (BetterMemory).
@@ -544,6 +590,7 @@ class ReconstructiveRecollection:
         self.sufficiency_verifier = SufficiencyVerifier()
         self.llm = get_llm_client()
         self.entity_extractor = EntityExtractor()
+        self.reranker = CrossEncoderReranker()
         # BetterMemory: Confidence Router threshold
         self.confidence_threshold = Config.CONFIDENCE_ROUTER_THRESHOLD
     
@@ -585,8 +632,22 @@ class ReconstructiveRecollection:
             retrieval_results, current_time
         )
         
-        # Sort by score and take top results
-        filtered_results.sort(key=lambda x: x.rrf_score, reverse=True)
+        # Step 1.5: Cross-Encoder Reranking (if dense confidence is low)
+        # Triggered if top-1 dense score < threshold
+        needs_rerank = (
+            filtered_results and 
+            filtered_results[0].dense_score < self.confidence_threshold
+        )
+        
+        if needs_rerank:
+            filtered_results = self.reranker.rerank(query, filtered_results)
+        
+        # Sort by score (rerank_score if reranked, otherwise rrf_score)
+        if needs_rerank:
+            filtered_results.sort(key=lambda x: x.rerank_score, reverse=True)
+        else:
+            filtered_results.sort(key=lambda x: x.rrf_score, reverse=True)
+        
         top_results = filtered_results[:max_episodes]
         
         # BetterMemory: CONFIDENCE ROUTER via BM25 Heuristic (fast path)
@@ -610,6 +671,7 @@ class ReconstructiveRecollection:
                 "context": context,
                 "memscenes": [],  # Skip memscene fetch on fast path
                 "confidence_routed": True,
+                "reranked": needs_rerank,
                 "query_entities": query_entities
             }
         
@@ -683,6 +745,7 @@ class ReconstructiveRecollection:
             "context": self._build_context(final_results),
             "memscenes": [s for s, _ in top_scenes] if top_scenes else [],
             "confidence_routed": False,
+            "reranked": needs_rerank,
             "query_entities": query_entities
         }
     

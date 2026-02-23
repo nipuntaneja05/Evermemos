@@ -378,6 +378,7 @@ class RetrievalResult:
     dense_score: float = 0.0
     sparse_score: float = 0.0
     rrf_score: float = 0.0
+    rerank_score: float = 0.0
     temporal_valid_foresights: list = field(default_factory=list)
     
     def to_dict(self) -> dict:
@@ -387,6 +388,7 @@ class RetrievalResult:
             "dense_score": self.dense_score,
             "sparse_score": self.sparse_score,
             "rrf_score": self.rrf_score,
+            "rerank_score": self.rerank_score,
             "temporal_valid_foresights": [f.to_dict() if isinstance(f, Foresight) else f 
                                           for f in self.temporal_valid_foresights]
         }
