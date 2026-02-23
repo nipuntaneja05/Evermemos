@@ -315,22 +315,51 @@ SCENE THEME: {scene.theme}
 SCENE SUMMARY:
 {scene.summary}
 
+IMPORTANT: For "attribute", you MUST use one of these standard categories:
+- "name" (user's name)
+- "age" (user's age)
+- "location" (where user lives)
+- "hometown" (where user is from)
+- "occupation" (user's job/role)
+- "company" (where user works)
+- "diet" (eating habits, food restrictions)
+- "health" (health conditions, medications)
+- "exercise" (fitness routine, sports)
+- "relationship" (marital status, partner)
+- "family" (family members, family situation)
+- "pet" (pets owned)
+- "hobby" (hobbies, interests, activities)
+- "music" (music preferences)
+- "travel_plan" (upcoming trips, travel goals)
+- "travel_history" (places visited)
+- "education" (degrees, schools)
+- "language" (languages spoken)
+- "goal" (personal or career goals)
+- "finance" (salary, budget, savings)
+- "housing" (rent, own, living situation)
+- "vehicle" (car, transport)
+- "sleep" (sleep habits)
+- "religion" (religious beliefs)
+- "political_view" (political leanings)
+If a fact doesn't fit any category, use a short snake_case name.
+Use the SAME attribute for related facts (e.g., both "vegan" and "eats fish" → "diet").
+
 Extract and respond with JSON:
 {{
-    "explicit_facts": [
-        {{
-            "attribute": "attribute name",
-            "value": "attribute value",
-            "confidence": 0.0-1.0
-        }}
-    ],
-    "implicit_traits": [
-        {{
-            "type": "preference|habit|personality",
-            "description": "description of the trait",
-            "strength": 0.0-1.0
-        }}
-    ]
+"explicit_facts": [
+    {{
+        "attribute": "category from list above",
+        "value": "attribute value",
+        "confidence": 0.0-1.0
+    }}
+],
+"implicit_traits": [
+    {{
+        "type": "preference|habit|personality",
+        "description": "description of the trait",
+        "strength": 0.0-1.0
+    }}
+]
 }}"""
         
         result = self.llm.generate_json(prompt, self.EXTRACTION_PROMPT)
@@ -370,34 +399,124 @@ Extract and respond with JSON:
         overlap = len(words1 & words2) / min(len(words1), len(words2))
         return overlap > 0.5
     
-    def detect_conflicts(self, profile: UserProfile) -> list:
-        """Analyze profile for potential conflicts."""
+    def _check_semantic_conflict(self, profile: UserProfile, new_fact: ExplicitFact):
+        """Check if a new fact semantically contradicts any existing active fact.
         
+        BetterMemory: O(n) check — compares ONE new fact against existing facts.
+        Uses embedding similarity to catch conflicts like 'vegan diet' vs 'eats fish'
+        even when they have different attribute names.
+        
+        Returns:
+            ConflictRecord if contradiction found, None otherwise
+        """
+        llm = get_llm_client()
+        new_desc = f"{new_fact.attribute}: {new_fact.value}"
+        
+        try:
+            new_emb = llm.embed(new_desc)
+        except Exception:
+            return None
+        
+        for attr, existing_fact in profile.explicit_facts.items():
+            if not isinstance(existing_fact, ExplicitFact):
+                continue
+            if existing_fact.status == "deprecated":
+                continue
+            if attr == new_fact.attribute:
+                continue  # Already handled by update_explicit_fact
+            
+            try:
+                existing_desc = f"{existing_fact.attribute}: {existing_fact.value}"
+                existing_emb = llm.embed(existing_desc)
+                
+                similarity = cosine_similarity(new_emb, existing_emb)
+                
+                if similarity > 0.75 and new_fact.value != existing_fact.value:
+                    # Soft-delete the older fact
+                    existing_fact.status = "deprecated"
+                    
+                    return ConflictRecord(
+                        attribute=f"{attr} vs {new_fact.attribute}",
+                        old_value=existing_fact.value,
+                        new_value=new_fact.value,
+                        old_source=existing_fact.source_memcell_id,
+                        new_source=new_fact.source_memcell_id,
+                        resolution="semantic_soft_delete"
+                    )
+            except Exception:
+                continue
+        
+        return None
+    
+    def detect_conflicts(self, profile: UserProfile) -> list:
+        """Analyze profile for potential conflicts using semantic similarity.
+        
+        BetterMemory: Uses embedding similarity to catch conflicts
+        even when attribute names differ (e.g., 'diet' vs 'eating_habits').
+        When a conflict is found, the older fact is soft-deleted.
+        """
         conflicts = []
         
         # Check explicit facts for contradictions
         facts_list = list(profile.explicit_facts.items())
+        active_facts = [(attr, fact) for attr, fact in facts_list 
+                        if not isinstance(fact, ExplicitFact) or fact.status == "active"]
         
-        for i, (attr1, fact1) in enumerate(facts_list):
-            for attr2, fact2 in facts_list[i+1:]:
+        for i, (attr1, fact1) in enumerate(active_facts):
+            for attr2, fact2 in active_facts[i+1:]:
                 if self._facts_contradict(fact1, fact2):
+                    # Determine which is older (soft-delete the older one)
+                    if fact1.timestamp <= fact2.timestamp:
+                        old_fact, new_fact = fact1, fact2
+                        old_attr, new_attr = attr1, attr2
+                    else:
+                        old_fact, new_fact = fact2, fact1
+                        old_attr, new_attr = attr2, attr1
+                    
+                    # BetterMemory: Soft-delete the older fact
+                    old_fact.status = "deprecated"
+                    
                     conflict = ConflictRecord(
-                        attribute=f"{attr1} vs {attr2}",
-                        old_value=fact1.value,
-                        new_value=fact2.value,
-                        old_source=fact1.source_memcell_id,
-                        new_source=fact2.source_memcell_id,
-                        resolution="pending"
+                        attribute=f"{old_attr} vs {new_attr}",
+                        old_value=old_fact.value,
+                        new_value=new_fact.value,
+                        old_source=old_fact.source_memcell_id,
+                        new_source=new_fact.source_memcell_id,
+                        resolution="recency_soft_delete"
                     )
                     conflicts.append(conflict)
         
         return conflicts
     
     def _facts_contradict(self, fact1: ExplicitFact, fact2: ExplicitFact) -> bool:
-        """Check if two facts contradict each other."""
-        # Same attribute with different values could be conflict
+        """Check if two facts contradict each other using semantic similarity.
+        
+        BetterMemory: Uses embedding-based similarity to detect semantic
+        conflicts even when attribute names differ.
+        E.g., 'follows vegan diet' vs 'started eating fish' → conflict detected.
+        """
+        # Quick check: exact attribute match with different values
         if fact1.attribute == fact2.attribute:
             return fact1.value != fact2.value
+        
+        # Semantic check: compare full fact descriptions via embeddings
+        try:
+            llm = get_llm_client()
+            desc1 = f"{fact1.attribute}: {fact1.value}"
+            desc2 = f"{fact2.attribute}: {fact2.value}"
+            
+            emb1 = llm.embed(desc1)
+            emb2 = llm.embed(desc2)
+            
+            similarity = cosine_similarity(emb1, emb2)
+            
+            # High similarity (>0.75) means they're about the same topic
+            # but different values → contradiction
+            if similarity > 0.75 and fact1.value != fact2.value:
+                return True
+        except Exception:
+            pass  # Fallback: no contradiction if embedding fails
+        
         return False
     
     def get_profile_summary(self, profile: UserProfile = None) -> str:

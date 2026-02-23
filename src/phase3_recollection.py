@@ -41,14 +41,23 @@ class EntityExtractor:
         "tell", "about", "know", "any", "some", "all", "not", "also",
         "been", "being", "it", "its", "they", "them", "their",
         "my", "me", "i", "you", "your", "we", "our", "he", "she", "his", "her",
+        # Prepositions (prevent "with", "from" etc. from being extracted as entities)
+        "with", "from", "to", "for", "by", "of", "in", "on", "at", "into",
+        # Common low-value nouns/verbs
+        "trip", "plan", "plans", "thing", "things", "stuff", "need", "want",
+        "like", "just", "really", "very", "much", "many", "more", "most",
+        "user", "users", "does", "make", "made", "going", "went",
     }
     
     @staticmethod
     def extract_query_entities(query: str) -> list:
         """
         Extract potential entity mentions from a query string.
-        Uses capitalization and common patterns to identify entities.
+        Uses capitalization, n-gram windows, and common patterns.
         Filters out question words and common stop words.
+        
+        BetterMemory: Supports multi-word entities (e.g., "New York",
+        "San Francisco") via bigram/trigram window.
         
         Args:
             query: The search query
@@ -58,28 +67,48 @@ class EntityExtractor:
         """
         entities = set()
         words = query.split()
+        clean_words = []
         
-        for i, word in enumerate(words):
-            # Remove punctuation for matching
+        # Pre-clean all words
+        for word in words:
             clean = re.sub(r'[^\w]', '', word)
-            if not clean:
+            clean_words.append(clean if clean else '')
+        
+        # Pass 1: Build runs of consecutive capitalized non-stop words
+        # This catches "New York", "San Francisco", "Los Angeles" etc.
+        i = 0
+        while i < len(clean_words):
+            clean = clean_words[i]
+            if not clean or clean.lower() in EntityExtractor.STOP_WORDS:
+                i += 1
                 continue
             
-            # Skip stop words and question words
-            if clean.lower() in EntityExtractor.STOP_WORDS:
-                continue
-            
-            # Capitalized words (except sentence start) are likely entities
             if clean[0].isupper() and len(clean) > 1:
-                # Skip common sentence starters unless clearly an entity
-                if i > 0 or len(clean) > 3:
+                # Start a run of consecutive capitalized words
+                run = [clean]
+                j = i + 1
+                while j < len(clean_words):
+                    next_clean = clean_words[j]
+                    if next_clean and next_clean[0].isupper() and len(next_clean) > 1 and next_clean.lower() not in EntityExtractor.STOP_WORDS:
+                        run.append(next_clean)
+                        j += 1
+                    else:
+                        break
+                
+                # Add the full multi-word entity
+                if len(run) > 1:
+                    entities.add(" ".join(run))
+                # Also add individual words if they're meaningful (>3 chars)
+                for word in run:
+                    if len(word) > 3 or (i > 0):
+                        entities.add(word)
+                
+                i = j
+            else:
+                # Non-capitalized, non-stop word — still could be entity in lowercase queries
+                if len(clean) > 3 and (i > 0 or len(clean) > 4):
                     entities.add(clean)
-            
-            # Multi-word entities: check consecutive capitalized words
-            if i > 0 and clean[0].isupper():
-                prev_clean = re.sub(r'[^\w]', '', words[i-1])
-                if prev_clean and prev_clean[0].isupper() and prev_clean.lower() not in EntityExtractor.STOP_WORDS:
-                    entities.add(f"{prev_clean} {clean}")
+                i += 1
         
         return list(entities)
 
@@ -106,6 +135,13 @@ class HybridRetriever:
         self.entity_filter_enabled = Config.ENTITY_FILTER_ENABLED
         self.entity_filter_min_results = Config.ENTITY_FILTER_MIN_RESULTS
     
+    def _tokenize_memcell(self, mc) -> list:
+        """Tokenize a single MemCell for BM25 indexing."""
+        facts_text = " ".join(mc.atomic_facts).lower()
+        entity_text = " ".join(getattr(mc.metadata, 'entities', [])).lower()
+        combined = f"{facts_text} {entity_text}"
+        return combined.split()
+    
     def _build_bm25_index(self, memcells: list = None):
         """Build or rebuild the BM25 index (entity-aware)."""
         if memcells is None:
@@ -119,17 +155,29 @@ class HybridRetriever:
         # Tokenize atomic facts + entity tags for each memcell
         # BetterMemory: Including entities in BM25 corpus so keyword
         # searches naturally match entity mentions (e.g. "Paris", "Google")
-        tokenized_corpus = []
-        for mc in memcells:
-            # Combine atomic facts into searchable text
-            facts_text = " ".join(mc.atomic_facts).lower()
-            # Add entity tags to the corpus for keyword matching
-            entity_text = " ".join(getattr(mc.metadata, 'entities', [])).lower()
-            combined = f"{facts_text} {entity_text}"
-            tokens = combined.split()
-            tokenized_corpus.append(tokens)
+        tokenized_corpus = [self._tokenize_memcell(mc) for mc in memcells]
         
         self._bm25_memcells = memcells
+        self._bm25_index = BM25Okapi(tokenized_corpus)
+    
+    def add_to_bm25_index(self, new_memcells: list):
+        """Incrementally add MemCells to the BM25 index without full rebuild.
+        
+        BetterMemory: Avoids fetching all MemCells from Qdrant every time.
+        Instead, appends new MemCells to the existing index.
+        """
+        if not new_memcells:
+            return
+        
+        if self._bm25_index is None or not self._bm25_memcells:
+            # No existing index — do a full build
+            self._build_bm25_index(new_memcells)
+            return
+        
+        # Append new MemCells and rebuild (BM25Okapi doesn't support incremental add)
+        # But we avoid the network call to get_all_memcells()
+        self._bm25_memcells.extend(new_memcells)
+        tokenized_corpus = [self._tokenize_memcell(mc) for mc in self._bm25_memcells]
         self._bm25_index = BM25Okapi(tokenized_corpus)
     
     def retrieve(self, query: str, top_k: int = None, query_entities: list = None) -> list:
@@ -500,7 +548,7 @@ class ReconstructiveRecollection:
         self.confidence_threshold = Config.CONFIDENCE_ROUTER_THRESHOLD
     
     def recall(self, query: str, current_time: datetime = None,
-               require_sufficient: bool = True,
+               require_sufficient: bool = False,
                max_episodes: int = None) -> dict:
         """
         Perform full reconstructive recollection for a query.
@@ -729,5 +777,9 @@ say so clearly. Be concise and accurate."""
         return answer.strip()
     
     def refresh_index(self):
-        """Refresh the BM25 index for sparse retrieval."""
+        """Refresh the BM25 index for sparse retrieval (full rebuild)."""
         self.hybrid_retriever.refresh_bm25_index()
+    
+    def add_to_index(self, memcells: list):
+        """Incrementally add MemCells to BM25 index without full rebuild."""
+        self.hybrid_retriever.add_to_bm25_index(memcells)

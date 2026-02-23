@@ -138,8 +138,8 @@ class Evermemos:
             memcells, self.user_id
         )
         
-        # Refresh BM25 index
-        self.phase3.refresh_index()
+        # Incrementally update BM25 index (avoids fetching all MemCells from Qdrant)
+        self.phase3.add_to_index(memcells)
         
         return {
             "success": True,
@@ -156,7 +156,7 @@ class Evermemos:
     
     def query(self, query_text: str, 
               current_time: datetime = None,
-              require_sufficient: bool = True) -> dict:
+              require_sufficient: bool = False) -> dict:
         """
         Query the memory system with full reconstructive recollection.
         

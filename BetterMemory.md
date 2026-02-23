@@ -43,15 +43,15 @@ BetterMemory addresses each with **zero additional dependencies** — using sign
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                      │
 │  INGESTION:                                                          │
-│  Transcript → ✨ Priority Filter (remove chitchat)                   │
+│  Transcript →  Priority Filter (remove chitchat)                   │
 │  → Sliding Window Boundary Detection                                 │
-│  → ✨ Unified LLM Call (narrative + S-A-O facts + entities)         │
-│  → MemCell (with entity tags) → Cluster → ✨ Virtual Graph Links    │
-│  → Profile (with ✨ soft-delete conflict handling)                   │
+│  →  Unified LLM Call (narrative + S-A-O facts + entities)         │
+│  → MemCell (with entity tags) → Cluster →  Virtual Graph Links    │
+│  → Profile (with soft-delete conflict handling)                   │
 │                                                                      │
 │  RETRIEVAL:                                                          │
-│  Query → Embed → Dense Search + ✨ Entity-Aware BM25 → RRF Fusion  │
-│  → ✨ BM25 Heuristic Check (keyword match? → SKIP LLM)             │
+│  Query → Embed → Dense Search +  Entity-Aware BM25 → RRF Fusion  │
+│  →  BM25 Heuristic Check (keyword match? → SKIP LLM)             │
 │  → Return in ~1.8s (no LLM calls in query path!)                   │
 │                                                                      │
 └──────────────────────────────────────────────────────────────────────┘
@@ -60,6 +60,7 @@ BetterMemory addresses each with **zero additional dependencies** — using sign
 ---
 
 ## Enhancement 1: BM25 Heuristic Confidence Router
+> Inspired by: **SwiftMem** (confidence-based fast-path routing)
 
 ### The Problem
 
@@ -73,15 +74,7 @@ Query → Retrieve → Ask LLM: "Is this context sufficient?" (3-5s)
 
 For "What is the user's diet?", the system retrieves a MemCell about diet on the first try — but still spends 3-5 seconds asking the LLM if the context is good enough.
 
-### Previous (Failed) Approach: Dense Score Threshold
 
-We first tried a **Confidence Router** that checks the top-1 dense similarity score:
-
-```
-If dense_score >= 0.85 → skip LLM check (fast path)
-```
-
-**Why it failed:** Cosine similarity scores from the Qwen2 embedding model cluster in a narrow 0.38–0.44 range for all queries. There's no meaningful separation between "high confidence" and "low confidence" — the score distribution is too compressed. Lowering the threshold just bypasses verification for everything, which hurts accuracy.
 
 ### BetterMemory Approach: BM25 Keyword Evidence
 
@@ -118,6 +111,7 @@ If ALL sparse_scores = 0 → no keyword match → run full LLM verification
 ---
 
 ## Enhancement 2: Priority Filter (Chitchat Removal)
+> Inspired by: **SwiftMem** (priority filtering to reduce noise before LLM processing)
 
 ### The Problem
 
@@ -156,6 +150,7 @@ Estimated ~15-20% fewer tokens sent to the LLM during ingestion, translating to 
 ---
 
 ## Enhancement 3: Entity-Aware BM25 Indexing
+> Inspired by: **Mem0** (entity-driven retrieval and grounding)
 
 ### The Problem
 
@@ -178,18 +173,12 @@ BM25 corpus: ["user likes pasta",
 
 Now "Google" matches via BM25 keyword search, even when the atomic fact doesn't use the exact word. This makes BM25 a stronger signal for the confidence router — more queries will have `sparse_score > 0`, enabling the fast path.
 
-### Why Not a Separate Entity Index?
 
-We originally considered Qdrant payload filtering for entity matching. But maintaining a separate index is:
-- More complex (two query paths to manage)
-- Slower (network call to Qdrant for filtering)
-- Brittle (exact string matching on entities)
-
-Injecting entities into BM25 is simpler, faster (local), and gets fuzzy matching for free (BM25 handles stemming/tokenization).
 
 ---
 
 ## Enhancement 4: S-A-O Atomic Facts
+> Inspired by: **A-MEM** (structured atomic memory representation)
 
 ### The Problem
 
@@ -218,6 +207,7 @@ Better conflict detection (77 → 79 conflicts detected at 100 conversations) wi
 ---
 
 ## Enhancement 5: Entity Extraction & Virtual Graph Linking
+> Inspired by: **Mem0** (knowledge graph construction) + **HiMem** (hierarchical memory linking)
 
 ### The Problem
 
@@ -242,6 +232,7 @@ A real graph database (Neo4j, etc.) adds operational complexity. Instead, we sto
 ---
 
 ## Enhancement 6: Soft-Delete Conflict Resolution
+> Inspired by: **MemBrain** (temporal conflict handling with audit trail)
 
 ### The Problem
 
@@ -270,6 +261,7 @@ Hard deletion loses valuable context. Knowing that the user **used to be** vegan
 ---
 
 ## Enhancement 7: Unified LLM Prompt Packing
+(reducing API call overhead through batching)
 
 ### The Problem
 
@@ -295,6 +287,7 @@ This is **prompt packing** — combining multiple extraction tasks into a single
 ---
 
 ## Enhancement 8: Stop-Word Filtered Entity Extraction
+> Inspired by: **Mem0** (entity extraction quality for retrieval grounding)
 
 ### The Problem
 
@@ -395,13 +388,66 @@ Soft-delete over hard-delete. Keep chitchat count stats. Preserve deprecated fac
 
 ---
 
+## Enhancement 9: Sleep-Time Updates (Decoupled Consolidation)
+> Inspired by: **LightMem** (separating online/offline memory operations)
+
+### The Problem
+
+In the original pipeline, ingestion is **synchronous and heavy**. When a user sends a message, the system runs the full pipeline before responding:
+
+```
+User message → Extract MemCell (Phase 1) → Cluster into MemScene (Phase 2)
+→ Resolve conflicts → Update profile → Evolve foresights → Done (~17s)
+```
+
+The user waits for ALL of this — including conflict resolution, profile evolution, and MemScene clustering — even though these operations have **no impact on the immediate response**.
+
+### BetterMemory Approach: Online + Offline Split
+
+Split memory operations into two phases:
+
+| Phase | When | What runs | Latency |
+|-------|------|-----------|---------|
+| **Online (Soft Update)** | During chat | Phase 1 only: extract MemCell, store with timestamp | **~2s** |
+| **Offline (Sleep-Time)** | User goes idle | Phase 2: clustering, conflict resolution, profile evolution, dedup | Background |
+
+**During chat:** Just extract the MemCell and store it. Don't resolve conflicts. Don't update the profile. Don't cluster into MemScenes. Return instantly.
+
+**During idle time ("sleep"):** Run the heavy consolidation operations in the background. The user is not waiting, so latency doesn't matter. This is where deduplication, conflict resolution, profile evolution, and MemScene reorganization happen.
+
+### Why This Works
+
+Conflict resolution and profile evolution are **not time-sensitive**. Whether you resolve a conflict 0.1 seconds or 5 minutes after the conversation doesn't change the user's experience. But making the user wait 17 seconds for it **does**.
+
+The key insight from LightMem: **memory formation can be lazy, but recall must be fast**.
+
+### Impact
+
+| Metric | Without Sleep-Time | With Sleep-Time |
+|--------|-------------------|----------------|
+| Ingestion latency | ~17s/conversation | **~2s/conversation** |
+| API calls during chat | 3-5 per conversation | **1 per conversation** |
+| Consolidation quality | Same | Same (just deferred) |
+
+---
+
+## Paper References Summary
+
+| Enhancement | Primary Inspiration | Key Idea Borrowed |
+|-------------|--------------------|---------|
+| BM25 Heuristic Router | **SwiftMem** | Confidence-based fast-path to skip LLM verification |
+| Priority Filter | **SwiftMem** | Pre-filter noise before expensive processing |
+| Entity-Aware BM25 | **Mem0** | Entity-driven retrieval for grounded matching |
+| S-A-O Atomic Facts | **A-MEM** | Structured atomic memory for precise conflict detection |
+| Virtual Graph Linking | **Mem0** + **HiMem** | Entity-overlap graph + hierarchical memory linking |
+| Soft-Delete Resolution | **MemBrain** | Temporal conflict handling with full audit trail |
+| Unified Prompt Packing | | Reduce API calls by batching extraction tasks |
+| Stop-Word Filtering | **Mem0** | Clean entity extraction for better retrieval grounding |
+| Sleep-Time Updates | **LightMem** | Decouple heavy updates from the user-facing chat path |
+
+---
+
 ## Future Directions
-
-### Sleep-Time Updates (from LightMem)
-
-Decouple heavy consolidation (conflict resolution, profile evolution) from the chat path. During chat, just store the MemCell. During idle time, run the expensive Phase 2 operations in the background.
-
-**Expected impact:** Ingestion drops from ~17s to ~2s per conversation (only Phase 1 runs synchronously).
 
 ### Sensory Pre-Compression (from LightMem)
 
