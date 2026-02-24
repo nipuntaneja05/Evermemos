@@ -833,8 +833,10 @@ MEMORY CONTEXT:
 
 QUESTION: {query}
 
-Answer based only on the provided context. If the context doesn't contain enough information,
-say so clearly. Be concise and accurate."""
+Answer based ONLY on the provided memory context. 
+If the context does not contain relevant information to answer the question, or if the question is completely unrelated to the context, you MUST reply EXACTLY with:
+"I don't have enough information in memory to answer this question."
+Do not attempt to answer using outside knowledge. Be concise and accurate."""
         
         answer = self.llm.generate(prompt, temperature=0.5)
         return answer.strip()

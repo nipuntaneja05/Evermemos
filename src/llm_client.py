@@ -26,7 +26,7 @@ class OllamaClient:
         # Local Qwen for embeddings (no API calls!)
         print(f"Loading local embedding model: {Config.EMBEDDING_MODEL}...")
         self.embedding_model = SentenceTransformer(Config.EMBEDDING_MODEL)
-        print("✓ Embedding model loaded")
+        print("[+] Embedding model loaded")
     
     def _check_ollama_connection(self):
         """Check if Ollama is running."""
@@ -152,7 +152,7 @@ class GroqClient:
         
         print(f"Loading local embedding model: {Config.EMBEDDING_MODEL}...")
         self.embedding_model = SentenceTransformer(Config.EMBEDDING_MODEL)
-        print("✓ Embedding model loaded")
+        print("[+] Embedding model loaded")
     
     def _retry_with_backoff(self, func, *args, **kwargs):
         """Execute a function with exponential backoff retry logic."""

@@ -25,6 +25,11 @@ def main():
     if "--test" in args:
         success = run_quick_test()
         sys.exit(0 if success else 1)
+    elif "--api" in args:
+        import uvicorn
+        print("Starting Evermemos Backend API on port 8000...")
+        uvicorn.run("src.api:app", host="0.0.0.0", port=8000, reload=False)
+        sys.exit(0)
     elif "--help" in args or "-h" in args:
         print(__doc__)
         sys.exit(0)

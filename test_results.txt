@@ -1,0 +1,102 @@
+
+Testing Retrieval Pipeline with 9 questions...
+
+============================================================
+Test 1: What am I training for next year?
+------------------------------------------------------------
+Extracted Entities: ['year', 'training', 'next']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 6.00s
+
+Generated Answer: You are training for the Chicago Marathon, with the goal of finishing the race in under 4 hours.
+============================================================
+
+============================================================
+Test 2: When is the marathon I'm training for?
+------------------------------------------------------------
+Extracted Entities: ['marathon', 'Im', 'training']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 2.46s
+
+Generated Answer: The Chicago Marathon is scheduled to take place in October.
+============================================================
+
+============================================================
+Test 3: Am I looking for a job right now?
+------------------------------------------------------------
+Extracted Entities: ['looking', 'right']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 2.65s
+
+Generated Answer: No, you are not looking for a job right now. According to the memory context, you have already accepted a job offer from Meta and are preparing to start your new position.
+============================================================
+
+============================================================
+Test 4: Did I start a new job recently?
+------------------------------------------------------------
+Extracted Entities: ['start', 'recently']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 3.05s
+
+Generated Answer: Yes, you started a new job at Meta, which you were supposed to start approximately three weeks after January 9, 2026, or January 22, 2026, with a start date around February 1, 2026.
+============================================================
+
+============================================================
+Test 5: Am I taking any medication or antibiotics?
+------------------------------------------------------------
+Extracted Entities: ['taking', 'medication', 'antibiotics']
+Pipeline: Confidence Routed (Fast)=False, Reranked=True
+Retrieve Stats: 4 Episodes, Iterations=1
+Time Taken: 2.69s
+
+Generated Answer: Yes, you are taking antibiotics.
+============================================================
+
+============================================================
+Test 6: What are my plans for buying a house?
+------------------------------------------------------------
+Extracted Entities: ['house', 'buying']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 2.53s
+
+Generated Answer: You have already purchased a house. In different episodes, the purchase dates were mentioned as December 1, 2025, December 22, 2025, and January 18, 2026. The house is a 3-bedroom house located in the suburbs, with a purchase price of $450,000 and a monthly mortgage payment of $2,800.
+============================================================
+
+============================================================
+Test 7: Did I recently change my diet to something else like a juice cleanse?
+------------------------------------------------------------
+Extracted Entities: ['something', 'else', 'juice', 'cleanse', 'recently', 'change', 'diet']
+Pipeline: Confidence Routed (Fast)=True, Reranked=False
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 2.81s
+
+Generated Answer: You considered changing your diet to a pescatarian diet, and also started a 5-day juice cleanse, but it is not clear if the juice cleanse was a recent change to your diet. However, according to the episodes, the most recent mention of a diet change was considering a pescatarian diet, and the most recent juice cleanse mentioned started on January 10, 2026, and another one was mentioned to start on January 16, 2026.
+============================================================
+
+============================================================
+Test 8: What is the capital of France?
+------------------------------------------------------------
+Extracted Entities: ['France', 'capital']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 2.72s
+
+Generated Answer: I don't have enough information in memory to answer this question.
+============================================================
+
+============================================================
+Test 9: Did I buy a spaceship recently?
+------------------------------------------------------------
+Extracted Entities: ['spaceship', 'recently']
+Pipeline: Confidence Routed (Fast)=True, Reranked=True
+Retrieve Stats: 8 Episodes, Iterations=1
+Time Taken: 2.24s
+
+Generated Answer: I don't have enough information in memory to answer this question.
+============================================================
+
