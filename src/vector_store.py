@@ -19,7 +19,8 @@ class VectorStore:
         self.client = QdrantClient(
             url=Config.QDRANT_URL,
             api_key=Config.QDRANT_API_KEY,
-            prefer_grpc=False
+            prefer_grpc=False,
+            timeout=60.0
         )
         self._ensure_collections()
     

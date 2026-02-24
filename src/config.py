@@ -26,8 +26,8 @@ class Config:
     QDRANT_COLLECTION_MEMSCENES: str = "evermemos_memscenes"
     
     # Embedding Configuration (LOCAL - no API calls)
-    EMBEDDING_MODEL: str = "Alibaba-NLP/gte-Qwen2-1.5B-instruct"  # Local Qwen model
-    EMBEDDING_DIMENSION: int = 1536
+    EMBEDDING_MODEL: str = "BAAI/bge-large-en-v1.5"  # High-performance HF model
+    EMBEDDING_DIMENSION: int = 1024
     
     # LLM Configuration
     LLM_PROVIDER: str = "groq"  # "ollama" (local), "groq", or "gemini"
